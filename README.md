@@ -1,16 +1,12 @@
 # Installation
+
+Assuming you are using ssh keys to push code. Else just clone normally
 ```bash
 git clone git@github.com:Fin-NewWin/relevance_weighted_meeting_scheduler.git
 npm install
 ```
 
-# Running the project
 # Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
 In the project directory, you can run:
 
 ### `npm start`
