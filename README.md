@@ -1,10 +1,20 @@
 # Installation
 
-Assuming you are using ssh keys to push code. Else just clone normally
+Assuming you have already installed npm. Clone repo and run following commands
 ```bash
-git clone git@github.com:Fin-NewWin/relevance_weighted_meeting_scheduler.git
 npm install
 ```
+else
+### MacOS
+```bash
+brew install node
+```
+### Debian/Ubuntu
+```bash
+apt install nodejs
+```
+### Windows
+[nodejs](https://nodejs.org/en/)
 
 # Getting Started with Create React App
 In the project directory, you can run:
