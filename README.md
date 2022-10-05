@@ -7,7 +7,7 @@ npm install
 else
 ### MacOS
 ```bash
-brew install node
+brew install node npm
 ```
 ### Debian/Ubuntu
 ```bash
