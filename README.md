@@ -11,7 +11,7 @@ brew install node
 ```
 ### Debian/Ubuntu
 ```bash
-apt install nodejs
+apt install nodejs npm
 ```
 ### Windows
 [nodejs](https://nodejs.org/en/)
