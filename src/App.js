@@ -30,6 +30,8 @@ function App() {
                                 selectRange={true}
                                 tileDisabled={isOnWeekend ? ({date}) => date.getDay() == 0 || date.getDay() == 6: ({date}) => date.getDay() == null}
                                 minDetail={"month"}
+                                next2Label={null}
+                                prev2Label={null}
                                 />
                         </div>
                     </div>

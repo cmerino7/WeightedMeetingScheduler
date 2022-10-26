@@ -20,11 +20,11 @@ body {
     padding: 25px;
     margin: 20px auto;
     background-color: #ffffff;
-    color: #282828;
     border-radius: 20px;
-    border-color: #000000;
+    border-color: #d3dce3;
     border-style: solid;
     border-width: 1px;
+    box-sizing: border-box;
 }
 
 .intro-left{
@@ -67,4 +67,8 @@ body {
 .react-calendar__navigation button{
     font-size: 16px;
     font-weight: bold;
+}
+
+.react-calendar__month-view__weekdays__weekday{
+    color: #ff0000;
 }
