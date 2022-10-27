@@ -3,6 +3,9 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import Slider from './Slider'
+
+
 const events = [
     {
       id: 1,
@@ -55,6 +58,10 @@ function Participant() {
         dateClick={(e) => console.log(e.dateStr)}
         eventClick={(e) => console.log(e.event.id)}
       />
+      <div className="Slider">
+        <Slider />
+      </div>
+
     </div>
         </header>
 
