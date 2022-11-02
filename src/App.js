@@ -47,15 +47,11 @@ function App() {
                             <p>Availability</p>
                             <input type="checkbox" />
                         </div>
+                        <br/>
+                        <div>
+                            <button>Create Event</button>
+                        </div>
                     </div>
-                </div>
-                <div className='intro-right'>
-                    <h2>TODO: Other bs</h2>
-                    <form>
-                        <button>
-                            URL Generator
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
