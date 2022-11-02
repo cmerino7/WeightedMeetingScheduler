@@ -3,7 +3,6 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 
-import Slider from './Slider'
 
 function App() {
     const [date, setDate] = useState(new Date());
@@ -37,7 +36,6 @@ function App() {
                         </div>
                     <div className='intro-right'>
                     <h2>TODO: pfp</h2>
-                    <Slider />
                 </div>
             </div>
         </div>

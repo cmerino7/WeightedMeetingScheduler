@@ -4,6 +4,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import Slider from './Slider'
+import ScheduleSelector from 'react-schedule-selector'
+//import NameForm from './NameForm';
 
 
 const events = [
@@ -21,7 +23,8 @@ const events = [
     },
     { id: 3, title: 'event 3', start: '2022-10-29', end: '2022-10-29' },
   ];
-  
+    
+
 function Participant() {
     return (
       <div className="participant">
@@ -29,45 +32,49 @@ function Participant() {
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <h1>
             {/* Edit <code>src/App.js</code> and save to reload. */}
-            Event Name:
+            Event Name: <p id="eventName"></p>
           </h1>
-          {/* <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a> */}
-          <div className="App">
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          center: 'timeGridWeek,timeGridDay new',
-        }}
-        customButtons={{
-          new: {
-            text: 'new',
-            click: () => console.log('new event'),
-          },
-        }}
-        events={events}
-        eventColor="red"
-        nowIndicator
-        dateClick={(e) => console.log(e.dateStr)}
-        eventClick={(e) => console.log(e.event.id)}
-      />
-      <div className="Slider">
-        <Slider />
-      </div>
-
-    </div>
+          {/* <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer"> Learn React </a> */}
         </header>
 
+
+
+          <div className="App">
+            <FullCalendar
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              initialView="timeGridWeek"
+              headerToolbar={{ center: 'timeGridWeek,timeGridDay new', }}
+              customButtons={{ new: { text: 'new', click: () => console.log('new event'), },  }}
+              events={events}
+              eventColor="red"
+              nowIndicator
+              dateClick={(e) => console.log(e.dateStr)}
+              eventClick={(e) => console.log(e.event.id)}
+            />
+          </div>
+
+          <div className="Slider">
+
     
+    
+            <div className="NameForm">
+              {/* <NameForm>sss</NameForm> */}
+            </div>
+            <Slider 
+               />
+            <br></br>
+            <Slider />
+            <br></br>
+            <Slider 
+            />
+            <br></br><br></br><br></br><br></br><br></br>{/*lol idk how to div*/}
+            <p>Select Availability:</p>
+            <div className="ScheduleSelector">
+              <ScheduleSelector/>
+            </div>
+          </div>
         {/* <div className="App">
-      <FullCalendar
+        <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         headerToolbar={{
@@ -84,8 +91,8 @@ function Participant() {
         nowIndicator
         dateClick={(e) => console.log(e.dateStr)}
         eventClick={(e) => console.log(e.event.id)}
-      />
-    </div> */}
+        />
+        </div> */}
       </div>
     );
   }

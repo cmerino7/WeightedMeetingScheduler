@@ -5,7 +5,7 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #fbf1c7;
+    background-color: white;
 }
 
 code {
@@ -39,6 +39,7 @@ margin: auto;
 .customSlider-mark {
     cursor: pointer;
     top: 6px;
+    margin-left: 10px;
     width: 1.5px;
     height: 8px;
     background-color: var(--mark-color);

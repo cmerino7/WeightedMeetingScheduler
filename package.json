@@ -13,8 +13,10 @@
     "react": "^18.2.0",
     "react-calendar": "^3.9.0",
     "react-dom": "^18.2.0",
+    "react-schedule-selector": "^3.0.0",
     "react-scripts": "5.0.1",
     "react-slider": "^2.0.4",
+    "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
