@@ -19,9 +19,18 @@ function App() {
                 <div className='intro-left'>
                     <div class="login-form">
                         <h1>Create Event</h1>
-                        <button onClick={toggleWeekend}>
-                            Weekend
-                        </button>
+                        <div>
+                            <input class="event-name" placeholder="Event Name"/>
+                        </div>
+                        <br></br>
+                        <div>
+                            <button onClick={toggleWeekend}>
+                                Weekend
+                            </button>
+
+                        </div>
+
+                        <form>Add some stuff</form>
                         <div class='calender-table'>
                             <Calendar
                                 onChange={onChange}
@@ -34,10 +43,19 @@ function App() {
                                 prev2Label={null}
                                 />
                         </div>
+                        <div>
+                            <p>Availability</p>
+                            <input type="checkbox" />
+                        </div>
                     </div>
                 </div>
                 <div className='intro-right'>
                     <h2>TODO: Other bs</h2>
+                    <form>
+                        <button>
+                            URL Generator
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
