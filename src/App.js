@@ -36,7 +36,10 @@ function App() {
                     <div class='calender-table'>
                         <Calendar
                             onChange={onChange}
-                            value={value}
+
+                            value={null}
+                            returnValue={value}
+
 
                             calendarType={"US"}
 
@@ -49,8 +52,19 @@ function App() {
 
                             next2Label={null}
                             prev2Label={null}
+
+                            defaultActiveStartDate={null}
+                            activeStartDate={null}
+
+                            defaultValue={null}
                             />
                     </div>
+
+                    {/*
+                        how to get the start and end dates using values
+                        {value[0] ? value[0].toDateString() : null}
+                    */}
+
                     <br/>
                     <div>
                         <Time />
