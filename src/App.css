@@ -14,7 +14,7 @@ body {
 }
 
 .intro{
-    display: flex;
+    flex: 1;
     text-align: center;
     width: 80%;
     padding: 25px;
@@ -67,6 +67,7 @@ body {
 .react-calendar__navigation button{
     font-size: 16px;
     font-weight: bold;
+    background-color: #f0f0f0;
 }
 
 
