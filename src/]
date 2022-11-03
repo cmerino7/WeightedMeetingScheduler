@@ -15,7 +15,7 @@ import './App.css';
 function App() {
     const [value, onChange] = useState(new Date());
     const [isOnWeekend, toggleWeekend] = useToggle(true);
-    const [isAvailable, toggleAvailable] = useToggle(true);
+    const [isAvailable, toggleAvailable] = useToggle();
 
 
 
@@ -31,33 +31,10 @@ function App() {
                         <input class="event-name" placeholder="Event Name"/>
                     </div>
 
-                   <br />
-                    <br />
-                    <div class='calender-table'>
-                        <Calendar
-                            onChange={onChange}
-                            value={value}
-
-                            calendarType={"US"}
-
-                            selectRange={true}
-
-                            tileDisabled={isOnWeekend ? ({date}) => date.getDay() == 0 || date.getDay() == 6: ({date}) => date.getDay() == null}
-
-                            minDetail={"month"}
-                            minDate={new Date()}
-
-                            next2Label={null}
-                            prev2Label={null}
-                            />
-                    </div>
-                    <br/>
                     <div>
-                        <Time />
-                    </div>
-                                            <div class="buttonbs">
 
                         <div class="toggle-buttons-1">
+
                             <div class="left-side">
                                 <label>
                                     <Switch onChange={toggleWeekend} checked={isOnWeekend}/>
@@ -68,25 +45,46 @@ function App() {
                                 <h3>Weekend</h3>
                                 <p>Toggle between enabling and disabling the weekend</p>
                             </div>
-                        </div>
-                        <br/>
-                        <br/>
-                        <div class="toggle-buttons-2">
-                            <div class="left-side">
-                                <label>
-                                    <Switch onChange={toggleAvailable} checked={isAvailable}/>
-                                </label>
-                            </div>
-                            <div class="left-side-text">
-                                <h3>Available</h3>
-                                <p>On if choosing selecting avaible time or off to select unavailable time</p>
-                            </div>
+
                         </div>
 
                     </div>
-
                     <br/>
                     <br/>
+                    <div class="toggle-buttons-2">
+                        <div class="left-side">
+                            <label>
+                                <Switch onChange={toggleWeekend} checked={isOnWeekend}/>
+                            </label>
+                        </div>
+                        <div class="left-side-text">
+                            <h3>Weekend</h3>
+                            <p>and disabling the weekend</p>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div class='calender-table'>
+                        <Calendar
+                            onChange={onChange}
+                            value={value}
+                            calendarType={"US"}
+                            selectRange={true}
+                            tileDisabled={isOnWeekend ? ({date}) => date.getDay() == 0 || date.getDay() == 6: ({date}) => date.getDay() == null}
+                            minDetail={"month"}
+                            next2Label={null}
+                            prev2Label={null}
+                            />
+                    </div>
+                    <br/>
+                    <div>
+                        <Time />
+                    </div>
+                    <div>
+                        <p>Availability</p>
+                        <input type="checkbox" />
+                    </div>
                     <br/>
                     <div>
                         <button>Create Event</button>
