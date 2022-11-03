@@ -4,8 +4,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import Slider from './Slider'
-import ScheduleSelector from 'react-schedule-selector'
+import Appp from './ScheduleSelector';
+//import ScheduleSelector from 'react-schedule-selector'
 //import NameForm from './NameForm';
+//import ScheduleSelector from"./ScheduleSelector";
+import React from "react";
 
 
 const events = [
@@ -67,10 +70,14 @@ function Participant() {
             <br></br>
             <Slider 
             />
-            <br></br><br></br><br></br><br></br><br></br>{/*lol idk how to div*/}
+            {/* <br></br><br></br><br></br><br></br><br></br>lol idk how to div */}
             <p>Select Availability:</p>
             <div className="ScheduleSelector">
-              <ScheduleSelector/>
+              {/* <ScheduleSelector/> */}
+              <Appp
+              // calendar={calendar}
+              // handleSubmitCalendar={handleSubmitCalendar}
+        />
             </div>
           </div>
         {/* <div className="App">
