@@ -18,6 +18,9 @@ class Appp extends React.Component {
           numDays={5}
           minTime={8}
           maxTime={17}
+          timeFormat={"hh:mm A"}
+          dateFormat={"ddd"}
+          // startdate ={"monday"}
           hourlyChunks={1}
           onChange={this.handleChange}
         />
