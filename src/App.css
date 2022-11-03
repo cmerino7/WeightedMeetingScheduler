@@ -27,17 +27,7 @@ body {
     box-sizing: border-box;
 }
 
-.intro-left{
-    flex: 1;
-    text-align: center;
-}
-.intro-left-wrapper{
-    padding-left: 10px;
-}
 
-.intro-right{
-    flex: 1;
-}
 
 .login-form h1 {
     font-weight: 1000;
@@ -68,6 +58,7 @@ body {
     font-size: 16px;
     font-weight: bold;
     background-color: #f0f0f0;
+    color: #000;
 }
 
 
@@ -96,6 +87,6 @@ body {
 }
 
 .event-name {
-    width: 50%;
+    width: 500px;
     height: 26px;
 }

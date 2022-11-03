@@ -3,7 +3,7 @@ import React from 'react';
 
 import { useState } from 'react';
 import { useToggle } from './utils/useToggle';
-import { Time } from './components/DateRange';
+import { Time } from './components/TimeRange';
 
 
 import 'react-calendar/dist/Calendar.css';
