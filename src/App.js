@@ -26,14 +26,19 @@ function App() {
     const onTimeChange = (e) => {
         if(e[0] != null){
             const startDate = e[0].getDate();
-            const startMonth = e[0].getMonth()
+            const startMonth = e[0].getMonth();
+            const startYear = e[0].getFullYear();
             timeObj.startTime = moment(timeObj.startTime).set({
-                'date': startDate, 'month': startMonth})
+                'date': startDate, 'month': startMonth, 'year': startYear})
 
             const endDate = e[1].getDate();
-            const endMonth = e[1].getMonth()
+            const endMonth = e[1].getMonth();
+            const endYear = e[1].getFullYear();
             timeObj.endTime = moment(timeObj.endTime).set({
-                'date': endDate, 'month': endMonth})
+                'date': endDate, 'month': endMonth, 'year': endYear})
+
+            // console.log(moment(timeObj.startTime).format('YYYY-MM-DD hh:mm a'));
+            // console.log(moment(timeObj.endTime).format('YYYY-MM-DD hh:mm a'));
 
         } else {
             setTime(e);
