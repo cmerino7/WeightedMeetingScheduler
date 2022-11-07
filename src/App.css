@@ -13,7 +13,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-.intro{
+.page-body {
     flex: 1;
     text-align: center;
     width: 80%;
@@ -27,12 +27,6 @@ body {
     box-sizing: border-box;
 }
 
-
-
-.login-form h1 {
-    font-weight: 1000;
-    text-align: center;
-}
 
 .calender-table {
     align-items: center;
@@ -71,64 +65,104 @@ body {
     background-color: #e3f2fd;
 }
 
-.react-calendar__tile--rangeStart {
-    background-color: #03a9f4;
-}
-
-.react-calendar__tile--active{
-    background-color: #03a9f4;
-}
-
-.react-calendar__tile--hoverBothEnds{
-    background-color: #03a9f4;
-}
-
-.react-calendar__tile--range {
-    background-color: #03a9f4;
-}
-
-.react-calendar__tile--rangeEnd {
+.react-calendar__tile--rangeStart, .react-calendar__tile--active, .react-calendar__tile--active,
+.react-calendar__tile--active, .react-calendar__tile--hoverBothEnds, .react-calendar__tile--range,
+.react-calendar__tile--rangeEnd, .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus{
     background-color: #03a9f4;
 }
 
 .event-name {
-    width: 40%;
-    height: 26px;
+    min-width:30%;
+    max-width: 40%;
+    height: 40px;
+    font-size: 30px;
+    text-align:center;
+    color: #000;
 }
 
-.toggle-buttons-1 {
+.tb1 {
     justify-content: center;
     align-items: center;
     height: 10px;
     width: 90%;
 }
 
-.toggle-buttons-2 {
+.tb2 {
     justify-content: center;
     align-items: center;
     height: 10px;
     width: 90%;
     margin-left: 50px;
 }
+.tb3 {
+    justify-content: center;
+    align-items: center;
+    height: 10px;
+    width: 90%;
+    margin-left: -27px;
+}
 
-.left-side {
+.tb-button {
     display: inline-block;
 }
 
-.left-side-text {
+.tb-description {
     text-align: left;
     display: inline-block;
     line-height: 2px;
     margin-left: 10px;
-      overflow-wrap: break-all;
+    overflow-wrap: break-all;
     hyphens: auto;
-    linebreak: auto;
 }
 
-.buttonbs {
+.toggle-button-page {
     width: 98%;
 }
 
-.react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus{
-    background: #03a9f4;
+.time-range #select-start, .time-range #select-end{
+    font-size: 16px;
+    color: #000;
+}
+.time-range .label {
+    font-weight: bold;
+    font-size:  16px;
+}
+
+hr {
+    width: 39%;
+    align-items: center;
+    color: #f0f0f0;
+}
+
+.submit-button {
+  align-items: center;
+  appearance: button;
+  background-color: #0276FF;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: "RM Neue",sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  padding: 10px 21px;
+  text-align: center;
+  text-transform: none;
+  transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.submit-button:active {
+  background-color: #006AE8;
+}
+
+.button-22:hover {
+  background-color: #1C84FF;
+
 }
