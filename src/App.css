@@ -13,6 +13,40 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+.topnav {
+    overflow: hidden;
+    height: 36px;
+    background-color: #0276FF;
+
+
+}
+.theme-selector select{
+    font-size: 18px;
+    float: right;
+    margin-right: 1%;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
 .page-body {
     flex: 1;
     text-align: center;

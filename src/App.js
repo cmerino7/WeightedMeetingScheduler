@@ -14,72 +14,60 @@ import 'react-calendar/dist/Calendar.css';
 import './App.css';
 
 function App() {
-    {/* Calendar and Time Variables*/}
+    {/* Calendar Variables*/}
     const [isOnWeekend, toggleWeekend] = useToggle(true);
     const [isAvailable, toggleAvailable] = useToggle(true);
     const [is24Hour, toggle24Hour] = useToggle();
-    const [dateTimeObject, setDateTime] = useState({
-        startDateTime: moment().set({
-            hour:   9,
-            minute: 0
-        }),
-
-        endDateTime: moment().set({
-            hour:   17,
-            minute: 0
-        })
+    const [dateTimeObject, setTimeDate] = useState({
+        startTimeDate: moment().set({hour:9, minute:0}),
+        endTimeDate: moment().set({hour:17, minute:0})
     });
 
-    const onDateTimeChange = (e) => {
+    const onTimeChange = (e) => {
         if(e[0] != null){
-            // Changing the calendar
-            // e = Date object
-            // translating Date to moment
             const startDate = e[0].getDate();
             const startMonth = e[0].getMonth();
             const startYear = e[0].getFullYear();
-            dateTimeObject.startDateTime = moment(dateTimeObject.startDateTime).set({
-                'date':     startDate,
-                'month':    startMonth,
-                'year':     startYear
+            dateTimeObject.startTimeDate = moment(dateTimeObject.startTimeDate).set({
+                'date': startDate,
+                'month': startMonth,
+                'year': startYear
             })
 
             const endDate = e[1].getDate();
             const endMonth = e[1].getMonth();
             const endYear = e[1].getFullYear();
-            dateTimeObject.endDateTime = moment(dateTimeObject.endDateTime).set({
-                'date':     endDate,
-                'month':    endMonth,
-                'year':     endYear
+            dateTimeObject.endTimeDate = moment(dateTimeObject.endTimeDate).set({
+                'date': endDate,
+                'month': endMonth,
+                'year': endYear
             })
 
-            // console.log(moment(timeObj.startTime).format('YYYY-MM-DD hh:mm a'));
-            // console.log(moment(timeObj.endTime).format('YYYY-MM-DD hh:mm a'));
-
         } else {
-            // Changing the time
-            // e = moment object
-            setDateTime(e);
+            setTimeDate(e);
         }
-        // console.log(moment(dateObject.startTime).format())
-        // console.log(moment(dateObject.endTime).format())
+        console.log(moment(dateTimeObject.startTimeDate).format())
+        console.log(moment(dateTimeObject.endTimeDate).format())
     };
 
     {/* input text field */}
-    const [eventName, setEventText] = useState('');
+    const [text, setText] = useState('');
 
 
     return (
         <div className="App">
+            <div className="NavBar" >
+                test
+            </div>
             <div className="page-body">
                 <div>
                     <input
                         class="event-name"
                         placeholder="Event Name"
 
-                        value={eventName}
-                        onChange = {(e) => setEventText(e.target.value)}
-                        style = {{width: `${eventName.length}ch`}}
+                        value={text}
+                        onChange = {(e) => setText(e.target.value)}
+                        style    = {{width: `${text.length}ch`}}
                         />
                 </div>
 
@@ -87,7 +75,7 @@ function App() {
                 <br />
                 <div class='calender-table'>
                     <Calendar
-                        onChange={onDateTimeChange}
+                        onChange={onTimeChange}
 
                         calendarType={"US"}
 
@@ -117,9 +105,9 @@ how to get the start and end dates using values
                 <hr />
                 <div class="time-range">
                     <TimeRange
-                        startMoment={dateTimeObject.startDateTime}
-                        endMoment={dateTimeObject.endDateTime}
-                        onChange={onDateTimeChange}
+                        startMoment={dateTimeObject.startTimeDate}
+                        endMoment={dateTimeObject.endTimeDate}
+                        onChange={onTimeChange}
                         use24Hours={is24Hour}
                         />
                     {/*
