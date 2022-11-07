@@ -15,7 +15,6 @@ import './App.css';
 
 function App() {
     {/* Calendar Variables*/}
-    const [value, onChange] = useState(new Date());
     const [isOnWeekend, toggleWeekend] = useToggle(true);
     const [isAvailable, toggleAvailable] = useToggle(true);
     const [is24Hour, toggle24Hour] = useToggle();
@@ -25,7 +24,20 @@ function App() {
     });
 
     const onTimeChange = (e) => {
-        setTime(e);
+        if(e[0] != null){
+            const startDate = e[0].getDate();
+            const startMonth = e[0].getMonth()
+            timeObj.startTime = moment(timeObj.startTime).set({
+                'date': startDate, 'month': startMonth})
+
+            const endDate = e[1].getDate();
+            const endMonth = e[1].getMonth()
+            timeObj.endTime = moment(timeObj.endTime).set({
+                'date': endDate, 'month': endMonth})
+
+        } else {
+            setTime(e);
+        }
     };
 
     {/* input text field */}
@@ -50,10 +62,7 @@ function App() {
                 <br />
                 <div class='calender-table'>
                     <Calendar
-                        onChange={onChange}
-
-                        returnValue={value}
-
+                        onChange={onTimeChange}
 
                         calendarType={"US"}
 
