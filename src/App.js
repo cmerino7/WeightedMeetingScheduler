@@ -14,39 +14,59 @@ import 'react-calendar/dist/Calendar.css';
 import './App.css';
 
 function App() {
-    {/* Calendar Variables*/}
+    {/* Calendar and Time Variables*/}
     const [isOnWeekend, toggleWeekend] = useToggle(true);
     const [isAvailable, toggleAvailable] = useToggle(true);
     const [is24Hour, toggle24Hour] = useToggle();
-    const [timeObj, setTime] = useState({
-        startTime: moment().set({hour:9, minute:0}),
-        endTime: moment().set({hour:17, minute:0})
+    const [dateTimeObject, setDateTime] = useState({
+        startDateTime: moment().set({
+            hour:   9,
+            minute: 0
+        }),
+
+        endDateTime: moment().set({
+            hour:   17,
+            minute: 0
+        })
     });
 
-    const onTimeChange = (e) => {
+    const onDateTimeChange = (e) => {
         if(e[0] != null){
+            // Changing the calendar
+            // e = Date object
+            // translating Date to moment
             const startDate = e[0].getDate();
             const startMonth = e[0].getMonth();
             const startYear = e[0].getFullYear();
-            timeObj.startTime = moment(timeObj.startTime).set({
-                'date': startDate, 'month': startMonth, 'year': startYear})
+            dateTimeObject.startDateTime = moment(dateTimeObject.startDateTime).set({
+                'date':     startDate,
+                'month':    startMonth,
+                'year':     startYear
+            })
 
             const endDate = e[1].getDate();
             const endMonth = e[1].getMonth();
             const endYear = e[1].getFullYear();
-            timeObj.endTime = moment(timeObj.endTime).set({
-                'date': endDate, 'month': endMonth, 'year': endYear})
+            dateTimeObject.endDateTime = moment(dateTimeObject.endDateTime).set({
+                'date':     endDate,
+                'month':    endMonth,
+                'year':     endYear
+            })
 
             // console.log(moment(timeObj.startTime).format('YYYY-MM-DD hh:mm a'));
             // console.log(moment(timeObj.endTime).format('YYYY-MM-DD hh:mm a'));
 
         } else {
-            setTime(e);
+            // Changing the time
+            // e = moment object
+            setDateTime(e);
         }
+        // console.log(moment(dateObject.startTime).format())
+        // console.log(moment(dateObject.endTime).format())
     };
 
     {/* input text field */}
-    const [text, setText] = useState('');
+    const [eventName, setEventText] = useState('');
 
 
     return (
@@ -57,9 +77,9 @@ function App() {
                         class="event-name"
                         placeholder="Event Name"
 
-                        value={text}
-                        onChange = {(e) => setText(e.target.value)}
-                        style    = {{width: `${text.length}ch`}}
+                        value={eventName}
+                        onChange = {(e) => setEventText(e.target.value)}
+                        style = {{width: `${eventName.length}ch`}}
                         />
                 </div>
 
@@ -67,7 +87,7 @@ function App() {
                 <br />
                 <div class='calender-table'>
                     <Calendar
-                        onChange={onTimeChange}
+                        onChange={onDateTimeChange}
 
                         calendarType={"US"}
 
@@ -97,9 +117,9 @@ how to get the start and end dates using values
                 <hr />
                 <div class="time-range">
                     <TimeRange
-                        startMoment={timeObj.startTime}
-                        endMoment={timeObj.endTime}
-                        onChange={onTimeChange}
+                        startMoment={dateTimeObject.startDateTime}
+                        endMoment={dateTimeObject.endDateTime}
+                        onChange={onDateTimeChange}
                         use24Hours={is24Hour}
                         />
                     {/*
@@ -117,7 +137,7 @@ get the time in the values
                         </div>
 
                         <div class="tb-description">
-                            <h3>Weekend</h3>
+                            <h3>Disable Weekend</h3>
                             <p>Toggle between enabling and disabling the weekend</p>
                         </div>
                     </div>
@@ -134,7 +154,7 @@ get the time in the values
                         </div>
                         <div class="tb-description">
                             <h3>Available</h3>
-                            <p>On if choosing selecting avaible time or off to select unavailable time</p>
+                            <p>On if choosing available time or off to select unavailable time</p>
                         </div>
                     </div>
                     <br/>

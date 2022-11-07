@@ -67,8 +67,9 @@ body {
 
 .react-calendar__tile--rangeStart, .react-calendar__tile--active, .react-calendar__tile--active,
 .react-calendar__tile--active, .react-calendar__tile--hoverBothEnds, .react-calendar__tile--range,
-.react-calendar__tile--rangeEnd, .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus{
-    background-color: #03a9f4;
+.react-calendar__tile--rangeEnd, .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
+    background-color: #0276FF;
+    color: #fff;
 }
 
 .event-name {
@@ -78,6 +79,7 @@ body {
     font-size: 30px;
     text-align:center;
     color: #000;
+    font-weight: bold;
 }
 
 .tb1 {
@@ -92,14 +94,14 @@ body {
     align-items: center;
     height: 10px;
     width: 90%;
-    margin-left: 50px;
+    margin-left: 26px;
 }
 .tb3 {
     justify-content: center;
     align-items: center;
     height: 10px;
     width: 90%;
-    margin-left: -27px;
+    margin-left: -28px;
 }
 
 .tb-button {
@@ -135,34 +137,35 @@ hr {
 }
 
 .submit-button {
-  align-items: center;
-  appearance: button;
-  background-color: #0276FF;
-  border-radius: 8px;
-  border-style: none;
-  box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  flex-shrink: 0;
-  font-family: "RM Neue",sans-serif;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-  padding: 10px 21px;
-  text-align: center;
-  text-transform: none;
-  transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+    align-items: center;
+    appearance: button;
+    background-color: #0276FF;
+    border-radius: 8px;
+    border-style: none;
+    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: "RM Neue",sans-serif;
+    font-size: 16px;
+    line-height: 1.15;
+    margin: 0;
+    padding: 10px 21px;
+    text-align: center;
+    text-transform: none;
+    transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-weight: bold;
 }
 
 .submit-button:active {
-  background-color: #006AE8;
+    background-color: #006AE8;
 }
 
 .button-22:hover {
-  background-color: #1C84FF;
+    background-color: #1C84FF;
 
 }
