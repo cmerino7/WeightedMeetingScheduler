@@ -18,13 +18,22 @@ body {
     height: 36px;
     background-color: #1976d2;
     font-weight: bold;
+    font-size: 17px;
 
 }
-.theme-selector select{
-    font-size: 18px;
+.theme-selector {
     float: right;
-    margin-right: 1%;
-    margin-top: 4px;
+    display: flex;
+    font-size: 17px;
+}
+
+.theme-selector p {
+    flex: 1;
+    color: #f2f2f2;
+    text-decoration: none;
+    margin-top: 5px;
+    padding-right: 5px;
+    font-size: 17px;
 }
 
 .topnav a {
@@ -35,17 +44,18 @@ body {
     padding-left: 10px;
     padding-top: 5px;
     text-decoration: none;
-    font-size: 17px;
 }
 
 .topnav a:hover {
     background-color: #ddd;
     color: black;
+    height: 36px;
 }
 
 .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
+    background-color: #ddd;
+    color: #000;
+    height: 36px;
 }
 
 .page-body {

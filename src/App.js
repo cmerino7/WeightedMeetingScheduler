@@ -1,27 +1,44 @@
 // online
 import Calendar from 'react-calendar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Switch from "react-switch";
 import TimeRange from "react-time-range";
 import moment from "moment";
-
-
-// custom
-import { useToggle } from './utils/useToggle';
-
 
 import 'react-calendar/dist/Calendar.css';
 import './App.css';
 
 function App() {
-{/* Calendar Variables*/}
-    const [isOnWeekend, toggleWeekend] = useToggle(true);
-    const [isAvailable, toggleAvailable] = useToggle(true);
-    const [is24Hour, toggle24Hour] = useToggle();
+    const storedWeekend = localStorage.getItem("weekendBool");
+    const hour24Bool = localStorage.getItem("hour24Bool");
+    {/* Calendar Variables*/}
+
+    const [isOnWeekend, toggleWeekend] = useState(!storedWeekend || storedWeekend == "true" ? true : false)
+    const [isAvailable, toggleAvailable] = useState(true);
+    const [is24Hour, toggle24Hour] = useState(!hour24Bool || hour24Bool == "false" ? false : true);
+
     const [dateTimeObject, setTimeDate] = useState({
-        startTimeDate: moment().set({hour:9, minute:0}),
-        endTimeDate: moment().set({hour:17, minute:0})
+        startTimeDate: moment().set({
+            hour:9,
+            minute:0
+        }),
+        endTimeDate: moment().set({
+            hour:17,
+            minute:0
+        })
     });
+
+    {/* When the variables change, store locally */}
+    useEffect(() =>
+        localStorage.setItem("weekendBool", JSON.stringify(isOnWeekend)),
+        localStorage.setItem("hour24Bool", JSON.stringify(is24Hour)),
+        [isOnWeekend, is24Hour]
+    );
+
+
+
+
+
 
     const onTimeChange = (e) => {
         if(e[0] != null){
@@ -46,28 +63,38 @@ function App() {
         } else {
             setTimeDate(e);
         }
-        console.log(moment(dateTimeObject.startTimeDate).format())
-        console.log(moment(dateTimeObject.endTimeDate).format())
+        // console.log(moment(dateTimeObject.startTimeDate).format())
+        // console.log(moment(dateTimeObject.endTimeDate).format())
     };
 
-{/* input text field */}
-    const [text, setText] = useState('');
+{/* input text field*/}
+    const [eventName, setEventName] = useState('');
 
+    const [themeOptions, setTheme] = useState("Light");
+
+    const changeTheme = (theme) => {
+        setTheme(theme);
+    }
+
+    useEffect(() => console.log(themeOptions), [themeOptions]);
 
     return (
         <div className="App">
             <div className="NavBar" >
                 <div class="topnav">
-                    <a href="#news">Create</a>
-                    <a href="#contact">Participant</a>
+                    <div>
+                        <a href="#news">Create</a>
+                        <a href="#contact">Participant</a>
+                    </div>
 
                     <div className="theme-selector">
-
-                        <select>
-                            <option value="0">Light</option>
-                            <option value="1">Dark</option>
-                            <option value="1">Light Contrast</option>
-                            <option value="1">Dark Contrast</option>
+                        <p>Themes</p>
+                        <select
+                            value={themeOptions}
+                            onChange={(event) => changeTheme(event.target.value)}
+                        >
+                            <option value="Light">Light</option>
+                            <option value="Dark">Dark</option>
                         </select>
 
                     </div>
@@ -77,12 +104,12 @@ function App() {
             <div className="page-body">
                 <div>
                     <input
-                        class="event-name"
+                        className="event-name"
                         placeholder="Event Name"
 
-                        value={text}
-                        onChange = {(e) => setText(e.target.value)}
-                        style    = {{width: `${text.length}ch`}}
+                        value={eventName}
+                        onChange = {(e) => setEventName(e.target.value)}
+                        style    = {{width: `${eventName.length}ch`}}
                         />
                 </div>
 
@@ -135,7 +162,10 @@ get the time in the values
                     <div class="tb1">
                         <div class="tb-button">
                             <label>
-                                <Switch onChange={toggleWeekend} checked={isOnWeekend}/>
+                                <Switch
+                                    onChange={toggleWeekend}
+                                    checked={isOnWeekend}
+                                    />
                             </label>
                         </div>
 
