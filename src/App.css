@@ -16,15 +16,14 @@ body {
 .topnav {
     overflow: hidden;
     height: 36px;
-    background-color: #0276FF;
-
+    background-color: #1976d2;
+    font-weight: bold;
 
 }
 .theme-selector select{
     font-size: 18px;
     float: right;
     margin-right: 1%;
-    text-align: center;
     margin-top: 4px;
 }
 
@@ -32,7 +31,9 @@ body {
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
     text-decoration: none;
     font-size: 17px;
 }

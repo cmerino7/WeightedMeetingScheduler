@@ -14,7 +14,7 @@ import 'react-calendar/dist/Calendar.css';
 import './App.css';
 
 function App() {
-    {/* Calendar Variables*/}
+{/* Calendar Variables*/}
     const [isOnWeekend, toggleWeekend] = useToggle(true);
     const [isAvailable, toggleAvailable] = useToggle(true);
     const [is24Hour, toggle24Hour] = useToggle();
@@ -50,14 +50,29 @@ function App() {
         console.log(moment(dateTimeObject.endTimeDate).format())
     };
 
-    {/* input text field */}
+{/* input text field */}
     const [text, setText] = useState('');
 
 
     return (
         <div className="App">
             <div className="NavBar" >
-                test
+                <div class="topnav">
+                    <a href="#news">Create</a>
+                    <a href="#contact">Participant</a>
+
+                    <div className="theme-selector">
+
+                        <select>
+                            <option value="0">Light</option>
+                            <option value="1">Dark</option>
+                            <option value="1">Light Contrast</option>
+                            <option value="1">Dark Contrast</option>
+                        </select>
+
+                    </div>
+
+                </div>
             </div>
             <div className="page-body">
                 <div>
