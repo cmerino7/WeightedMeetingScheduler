@@ -9,14 +9,16 @@ import 'react-calendar/dist/Calendar.css';
 import './App.css';
 
 function App() {
+    // Getting stored local variables as strings
     const storedWeekend = localStorage.getItem("weekendBool");
     const hour24Bool = localStorage.getItem("hour24Bool");
-    {/* Calendar Variables*/}
 
+    // If stored variable, set, else defaults
     const [isOnWeekend, toggleWeekend] = useState(!storedWeekend || storedWeekend == "true" ? true : false)
     const [isAvailable, toggleAvailable] = useState(true);
     const [is24Hour, toggle24Hour] = useState(!hour24Bool || hour24Bool == "false" ? false : true);
 
+    // Calendar objects stored as Moment type
     const [dateTimeObject, setTimeDate] = useState({
         startTimeDate: moment().set({
             hour:9,
@@ -28,7 +30,7 @@ function App() {
         })
     });
 
-    {/* When the variables change, store locally */}
+    // When variables updates, stores locally to access for later
     useEffect(() =>
         localStorage.setItem("weekendBool", JSON.stringify(isOnWeekend)),
         localStorage.setItem("hour24Bool", JSON.stringify(is24Hour)),
@@ -67,11 +69,15 @@ function App() {
         // console.log(moment(dateTimeObject.endTimeDate).format())
     };
 
-{/* input text field*/}
     const [eventName, setEventName] = useState('');
 
     const [themeOptions, setTheme] = useState("Light");
 
+    const opt = [
+        {label: "Light", value: 1},
+        {label: "Other", value: 2},
+    ]
+    // TODO: Add theme changer
     const changeTheme = (theme) => {
         setTheme(theme);
     }
@@ -92,6 +98,7 @@ function App() {
                         <select
                             value={themeOptions}
                             onChange={(event) => changeTheme(event.target.value)}
+                            options={opt}
                         >
                             <option value="Light">Light</option>
                             <option value="Dark">Dark</option>
