@@ -14,18 +14,18 @@ function App() {
     const hour24Bool = localStorage.getItem("hour24Bool");
 
     // If stored variable, set, else defaults
-    const [isOnWeekend, toggleWeekend] = useState(!storedWeekend || storedWeekend == "true" ? true : false)
+    const [isOnWeekend, toggleWeekend] = useState(!storedWeekend || storedWeekend === "true" ? true : false)
     const [isAvailable, toggleAvailable] = useState(true);
-    const [is24Hour, toggle24Hour] = useState(!hour24Bool || hour24Bool == "false" ? false : true);
+    const [is24Hour, toggle24Hour] = useState(!hour24Bool || hour24Bool === "false" ? false : true);
 
     // Calendar objects stored as Moment type
     const [dateTimeObject, setTimeDate] = useState({
         startTimeDate: moment().set({
-            hour:9,
-            minute:0
+            hour: 9,
+            minute: 0
         }),
         endTimeDate: moment().set({
-            hour:17,
+            hour: 17,
             minute:0
         })
     });
@@ -33,10 +33,13 @@ function App() {
     // When variables updates, stores locally to access for later
     useEffect(() =>
         localStorage.setItem("weekendBool", JSON.stringify(isOnWeekend)),
-        localStorage.setItem("hour24Bool", JSON.stringify(is24Hour)),
-        [isOnWeekend, is24Hour]
+        [isOnWeekend]
     );
 
+    useEffect(() =>
+        localStorage.setItem("hour24Bool", JSON.stringify(is24Hour)),
+        [is24Hour]
+    );
 
 
 
@@ -73,10 +76,6 @@ function App() {
 
     const [themeOptions, setTheme] = useState("Light");
 
-    const opt = [
-        {label: "Light", value: 1},
-        {label: "Other", value: 2},
-    ]
     // TODO: Add theme changer
     const changeTheme = (theme) => {
         setTheme(theme);
@@ -98,7 +97,6 @@ function App() {
                         <select
                             value={themeOptions}
                             onChange={(event) => changeTheme(event.target.value)}
-                            options={opt}
                         >
                             <option value="Light">Light</option>
                             <option value="Dark">Dark</option>
@@ -130,7 +128,7 @@ function App() {
 
                         selectRange={true}
 
-                        tileDisabled={isOnWeekend ? ({date}) => date.getDay() == 0 || date.getDay() == 6: ({date}) => date.getDay() == null}
+                        tileDisabled={isOnWeekend ? ({date}) => date.getDay() === 0 || date.getDay() === 6: ({date}) => date.getDay() == null}
 
                         minDetail={"month"}
                         minDate={new Date()}
