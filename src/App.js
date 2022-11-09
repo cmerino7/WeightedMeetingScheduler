@@ -6,8 +6,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 
 
 
-import Create from './Create.js';
-import  Users from './users.js';
+import Create from './components/Organizer/Create.js';
 
 function App() {
     const [themeOptions, setTheme] = useState("Light");
@@ -25,7 +24,6 @@ function App() {
                 <div class="topnav">
                     <div>
                         <Link to="/">Create</Link>
-                        <Link to="/users">Users</Link>
                     </div>
                     <div className="theme-selector">
                         <p>Themes</p>
@@ -43,7 +41,6 @@ function App() {
         </nav>
         <Routes>
             <Route path="/" element={<Create />} />
-            <Route path="/users" element={<Users />} />
         </Routes>
         </>
     )
