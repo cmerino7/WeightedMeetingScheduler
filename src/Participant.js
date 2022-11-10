@@ -5,11 +5,9 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import Slider from './Slider'
 import Appp from './ScheduleSelector';
-//import ScheduleSelector from 'react-schedule-selector'
-//import NameForm from './NameForm';
-//import ScheduleSelector from"./ScheduleSelector";
 import React from "react";
-
+import { useState } from "react";
+import Homepage from './ScheduleSide';
 
 const events = [
     {
@@ -55,54 +53,12 @@ function Participant() {
               eventClick={(e) => console.log(e.event.id)}
             />
           </div>
+          <Homepage></Homepage>
 
-          <div className="Slider">
-
-    
-    
-            <div className="NameForm">
-              {/* <NameForm>sss</NameForm> */}
-            </div>
-            <Slider 
-               />
-            <br></br>
-            <Slider />
-            <br></br>
-            <Slider 
-            />
-            {/* <br></br><br></br><br></br><br></br><br></br>lol idk how to div */}
-            <p>Select Availability:</p>
-            <div className="ScheduleSelector">
-              {/* <ScheduleSelector/> */}
-              <Appp
-              // calendar={calendar}
-              // handleSubmitCalendar={handleSubmitCalendar}
-        />
-            </div>
-          </div>
-        {/* <div className="App">
-        <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          center: 'dayGridMonth,timeGridWeek,timeGridDay new',
-        }}
-        customButtons={{
-          new: {
-            text: 'new',
-            click: () => console.log('new event'),
-          },
-        }}
-        events={events}
-        eventColor="red"
-        nowIndicator
-        dateClick={(e) => console.log(e.dateStr)}
-        eventClick={(e) => console.log(e.event.id)}
-        />
-        </div> */}
       </div>
     );
   }
+
   
   export default Participant;
   

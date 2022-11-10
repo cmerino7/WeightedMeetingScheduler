@@ -104,3 +104,11 @@ animation: App-logo-spin infinite 20s linear;
     transform: rotate(360deg);
   }
 }
+
+.logMsg {
+  text-align: center;
+}
+
+.logButton{
+  text-align: center;
+}
