@@ -13,8 +13,10 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-slider": "^2.0.4",
     "react-switch": "^7.0.0",
     "react-time-range": "^1.0.4",
+    "slider": "^1.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
