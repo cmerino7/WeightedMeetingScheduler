@@ -7,6 +7,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 
 
 import Create from './components/Create.js';
+import Part from './components/Participant.js';
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
                     <div>
                         <Link to="/">Create</Link>
                     </div>
+                    <div>
+                        <Link to="/Participant">Participant</Link>
+                    </div>
                     <div className="theme-selector">
                         <p>Themes</p>
                         <select
@@ -42,6 +46,7 @@ function App() {
         </nav>
         <Routes>
             <Route path="/" element={<Create />} />
+            <Route path="/Participant" element={<Part />} />
         </Routes>
         </>
     )
