@@ -112,3 +112,7 @@ animation: App-logo-spin infinite 20s linear;
 .logButton{
   text-align: center;
 }
+
+.loginbox {
+  text-align: center;
+}

@@ -28,12 +28,14 @@ class Login extends React.Component {
         
         <form onSubmit={this.props.onClickFunc} > 
         {/* <form onSubmit={this.handleSubmit}>    use this to handle events later   */}
-            <label>
-                Name:
-                <input type="text" value={this.state.value} onChange={this.handleChange} />    
-            </label>
-          <input type="submit" value="Submit" />
-          <Message data={data}/>
+            <div className="loginbox">
+              <label>
+                  Name:
+                  <input type="text" value={this.state.value} onChange={this.handleChange} />    
+              </label>
+              <input type="submit" value="Submit" />
+            </div>
+          
         </form>
       );
     }

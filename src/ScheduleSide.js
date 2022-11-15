@@ -48,12 +48,13 @@ class Homepage extends React.Component{
                                 // calendar={calendar}
                                 // handleSubmitCalendar={handleSubmitCalendar}
                                 />
+                                
                             </div>
                         </div>
                     </div>
                     ) : (
-                    <Login onClickFunc = {this.loginClicked} />
-                    )
+                        <Login onClickFunc = {this.loginClicked} />
+                        )
                 }
  
             </div>
