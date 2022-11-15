@@ -43,6 +43,7 @@ function OrgParticipant() {
         <option value>Name3</option>
         <option value>Name4</option>
     </select>
+    <Slider />
             </div>
             </div>
    );
