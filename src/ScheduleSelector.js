@@ -51,7 +51,7 @@ class Appp extends React.Component {
         startHour: 9,
         endHour: 17,
         step: 60,
-        cellRenderer: ({ height, start, onClick, ...props }) => {
+        cellRenderer: ({ height, start,  ...props }) => {
           // Fake some condition up
           const hour = start.getHours();
           const disabled = hour === 14;
@@ -65,9 +65,9 @@ class Appp extends React.Component {
               }}
               onClick={() => {
                 if (disabled) {
-                  return alert("Opss");
+                  return alert("GET FUCKED");
                 }
-                onClick();
+                // onClick();
               }}
               disableRipple={disabled}
               // disabled={disabled}
