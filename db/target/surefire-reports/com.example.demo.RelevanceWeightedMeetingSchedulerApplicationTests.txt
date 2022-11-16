@@ -1,7 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.example.demo.RelevanceWeightedMeetingSchedulerApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.431 s <<< FAILURE! - in com.example.demo.RelevanceWeightedMeetingSchedulerApplicationTests
-com.example.demo.RelevanceWeightedMeetingSchedulerApplicationTests  Time elapsed: 0.428 s  <<< ERROR!
-java.lang.IllegalStateException: Found multiple @SpringBootConfiguration annotated classes [Generic bean: class [com.example.demo.DemoApplication]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [/home/fin/proj/relevance_weighted_meeting_scheduler/target/classes/com/example/demo/DemoApplication.class], Generic bean: class [com.example.demo.RelevanceWeightedMeetingSchedulerApplication]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [/home/fin/proj/relevance_weighted_meeting_scheduler/target/classes/com/example/demo/RelevanceWeightedMeetingSchedulerApplication.class]]
-
