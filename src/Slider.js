@@ -4,12 +4,21 @@ import { useState } from "react";
 
 //A FUNCTION COMPONENT--STATE HOOK
 
-const Slider = () => {
+const Slider = (props) => {
     const [currentValue, setCurrentValue] = useState(0);
+    console.log(currentValue)
+    props.this.data=currentValue
+
+
+    onTrigger = (event) => {
+      this.props.parentCallback(event.target.value);
+      event.preventDefault();
+    }
+
     return (
       <div>
         <ReactSlider
-        
+        onChange={this.onTrigger}
         className="customSlider"
         trackClassName="customSlider-track"
         thumbClassName="customSlider-thumb"
@@ -22,7 +31,7 @@ const Slider = () => {
         defaultValue={0}
         value={currentValue}
         renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
-        onChange={(value) => setCurrentValue(value)}
+        //onChange={(value) => setCurrentValue(value)}
         //onChange={(value) => sendDataToPart(value)}
 
         

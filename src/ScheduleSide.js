@@ -27,8 +27,14 @@ class Homepage extends React.Component{
         this.setState({isLoggedIn : false});
     }
  
+    state = { name: "",}
+
+    handleCallback= (childData) => {
+        this.setState({name: childData})
+      }
+
     render(){
- 
+        const {name} = this.state;
         return(
  
             <div>
@@ -38,11 +44,11 @@ class Homepage extends React.Component{
                 {
                     (this.state.isLoggedIn)?(
                     <div>
-                    <Logout onClickFunc = {this.logoutClicked} />
+                    <Logout onClickFunc = {this.logoutClicked}  />
                     
                         <div className='Slider'>
-                        <Slider/>
-                            <p>Select Availability:</p>
+                        <Slider parentCallback={this.handleCallback}/>
+                            <p>Select Availability: {name}</p>
                             <div className="ScheduleSelector">
                                 <Appp
                                 // calendar={calendar}
