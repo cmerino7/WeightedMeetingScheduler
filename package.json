@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aldabil/react-scheduler": "^2.5.7",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fullcalendar/daygrid": "^5.11.3",
@@ -21,12 +22,11 @@
     "react-calendar": "^3.9.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
-    "react-scripts": "5.0.1",
-    "react-switch": "^7.0.0",
-    "react-time-range": "^1.0.4",
     "react-schedule-selector": "^3.0.0",
     "react-scripts": "5.0.1",
     "react-slider": "^2.0.4",
+    "react-switch": "^7.0.0",
+    "react-time-range": "^1.0.4",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },

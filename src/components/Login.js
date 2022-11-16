@@ -33,7 +33,7 @@ class Login extends React.Component {
                 <input type="text" value={this.state.value} onChange={this.handleChange} />    
             </label>
           <input type="submit" value="Submit" />
-          <Message data={data}/>
+          {/* <Message data={data}/> */}
         </form>
       );
     }
