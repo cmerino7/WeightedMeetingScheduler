@@ -23,19 +23,16 @@ import React from "react";
 import "./ScheduleSelector.css";
 import ScheduleSelector from "react-schedule-selector";
 import { Scheduler } from "@aldabil/react-scheduler";
-import { red } from "@mui/material/colors";
 
 
-import { EVENTS } from "./events";
 import { Button } from "@mui/material";
 
-import { useState } from "react";
 class Appp extends React.Component {
     // state = { schedule: [] };
     constructor(props) {
         super(props);
         this.state = {
-            events: EVENTS,
+            events: [],
             id: 10,
         }
     }
