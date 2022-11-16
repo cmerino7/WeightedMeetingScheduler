@@ -164,6 +164,22 @@ class Appp extends React.Component {
         })
     };
 
+    delEvent(id) {
+
+        var index = this.state.id.indexOf(id)
+
+        this.state.id.splice(index, 1)
+        this.state.events.splice(index, 1)
+
+        this.setState({
+            events: this.state.events,
+            //id: this.state.id + 1,
+            id: this.state.id,
+            count: this.state.count,
+            countid:this.state.countid,
+        })
+    };
+
     render() {
         return (
             <div className="Appp">
@@ -172,6 +188,7 @@ class Appp extends React.Component {
             view="week"
             day={null}
             month={null}
+            onDelete={(id) => this.delEvent(id)}
             week={{
                 weekDays: [0, 1, 2, 3, 4, 5],
                     weekStartOn: 6,
