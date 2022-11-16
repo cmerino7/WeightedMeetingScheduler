@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: white;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+    --main-color:#0047FF;
+    --main-color-hover: #00298f4d;
+    --track-color: #ddd;
+    /* Default mark color*/
+    --mark-color: #aaaaaa;
+}
+
+.customSlider {
+    /* max width of your slider */
+    max-width: 300px;
+    /* Optional: Only If you want to center your slider in the page */
+    margin: auto;
+}
+
+.customSlider-mark.customSlider-mark-before {
+    background-color: var(--main-color);
+}
+
+.customSlider-mark.customSlider-mark-active {
+    display: none;
+}
+
+.customSlider-mark {
+    cursor: pointer;
+    top: 6px;
+    margin-left: 10px;
+    width: 1.5px;
+    height: 8px;
+    background-color: var(--mark-color);
+}
+
+.customSlider-track {
+    /* Top value to align your track to the center of your thumb */
+    top: 8px;
+    /* thickness of the track */
+    height: 4px;
+    /* default color of your track */
+    background: var(--track-color);
+}
+
+.customSlider-track.customSlider-track-0 {
+    /* color of the track before the thumb */
+    background: var(--main-color);
+}
+
+.customSlider-thumb {
+    cursor: pointer;
+    /*color for the thumb */
+    background: var(--main-color);
+    /* shape of the thumb: circle */
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    /* remove default outline when selected */
+    outline: none;
+}
+
+.customSlider-thumb:hover {
+    box-shadow: 0 0 0 8px var(--main-color-hover);
+}
