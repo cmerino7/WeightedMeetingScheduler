@@ -40,7 +40,7 @@ function Participant() {
 
 
 
-        <div className="App">
+        {/* <div className="App">
         <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="timeGridWeek"
@@ -52,7 +52,7 @@ function Participant() {
         dateClick={(e) => console.log(e.dateStr)}
         eventClick={(e) => console.log(e.event.id)}
         />
-        </div>
+        </div> */}
         <Homepage></Homepage>
 
         </div>
