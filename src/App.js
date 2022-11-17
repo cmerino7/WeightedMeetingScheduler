@@ -8,6 +8,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 
 import Create from './components/Create.js';
 import Part from './components/Participant.js';
+import Results from './components/OrgParticipant.js';
 
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
                     <div>
                         <Link to="/Participant">Participant</Link>
                     </div>
+                    <div>
+                        <Link to="/OrgParticipant">Results</Link>
+                    </div>
                     <div className="theme-selector">
                         <p>Themes</p>
                         <select
@@ -47,6 +51,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Create />} />
             <Route path="/Participant" element={<Part />} />
+            <Route path="/OrgParticipant" element={<Results />} />
         </Routes>
         </>
     )

@@ -10,7 +10,7 @@ import React from "react";
 
 
 //import 'react-calendar/dist/Calendar.css';
-import './OrgParticipant.css';
+// import './OrgParticipant.css';
 
 function OrgParticipant() {
     return(
@@ -24,14 +24,14 @@ function OrgParticipant() {
                 Event Name: <p id="event-name"></p>
             </h1>
             <h2>
-                {} 
+                {}
                 Use the slider down below to add each person relevant weight  <p id="event-name"></p>
             </h2>
             {}
-            
+
             </header>
-            
-           
+
+
         <select name="individual" id="participant">
         <select className="Names"></select>
         <option value>Name1</option>
