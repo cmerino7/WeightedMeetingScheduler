@@ -4,57 +4,45 @@ import Login from './Login';
 import Logout from './Logout';
 import Slider from './Slider'
 import Appp from './ScheduleSelector';
+import ReactSlider from "react-slider";
+import SliderEvents from './Slider';
+
 
 class Homepage extends React.Component{
- 
     constructor(props)
     {
         super(props);
- 
+        this.state = { currentName: "test"}
         this.state = {isLoggedIn : false};
  
         this.loginClicked = this.loginClicked.bind(this);
         this.logoutClicked = this.logoutClicked.bind(this);
     }
  
-    loginClicked()
-    {
+    loginClicked()    {
         this.setState({isLoggedIn : true});
     }
  
-    logoutClicked()
-    {
+    logoutClicked()    {
         this.setState({isLoggedIn : false});
     }
- 
-    state = { name: "",}
-
-    handleCallback= (childData) => {
-        this.setState({name: childData})
-      }
 
     render(){
-        const {name} = this.state;
-        return(
- 
-            <div>
- 
-                <Message isLoggedIn = {this.state.isLoggedIn}/>
-
-                {
+        const {currentName} = this.state;
+         return(
+             <div>
+                 <Message isLoggedIn = {this.state.isLoggedIn} name={currentName}/>
+                { 
                     (this.state.isLoggedIn)?(
                     <div>
-                    <Logout onClickFunc = {this.logoutClicked}  />
-                    
+                    <Logout onClickFunc = {this.logoutClicked} />
                         <div className='Slider'>
-                        <Slider parentCallback={this.handleCallback}/>
-                            <p>Select Availability: {name}</p>
+                            <p>Select Availability:</p>
                             <div className="ScheduleSelector">
                                 <Appp
                                 // calendar={calendar}
                                 // handleSubmitCalendar={handleSubmitCalendar}
                                 />
-                                
                             </div>
                         </div>
                     </div>
@@ -62,10 +50,8 @@ class Homepage extends React.Component{
                         <Login onClickFunc = {this.loginClicked} />
                         )
                 }
- 
             </div>
-                 
             );
     }
 }
-    export default Homepage;
+export default Homepage;
