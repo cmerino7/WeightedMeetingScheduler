@@ -1,45 +1,60 @@
-import './App.css';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import { useState } from 'react';
+// online
+import React, {useEffect, useState}  from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
+
+
+
+
+
+import Create from './components/Create.js';
+import Part from './components/Participant.js';
+import Results from './components/OrgParticipant.js';
 
 
 function App() {
-    const [date, setDate] = useState(new Date());
+    const [themeOptions, setTheme] = useState("Light");
+
+    // TODO: Add theme changer
+    const changeTheme = (theme) => {
+        setTheme(theme);
+    }
+
+    useEffect(() => console.log(themeOptions), [themeOptions]);
+
     return (
-        <div className="App">
-            <div className='intro'>
-                <div className='intro-left'>
-                    <div class="login-form">
-                            <h1>Create Event</h1>
-                            <div class='ex'>
-                                <Calendar
-                                    onChange={setDate}
-                                    value={date}
-                                    selectRange={true}
-                                    />
-                            </div>
-                            {date.length > 0 ? (
-                                <p className='text-center'>
-                                    <span className='bold'>Start:</span>{' '}
-                                    {date[0].toDateString()}
-                                    &nbsp;|&nbsp;
-                                    <span className='bold'>End:</span> {date[1].toDateString()}
-                                </p>
-                            ) : (
-                                    <p className='text-center'>
-                                        <span className='bold'>Default selected date:</span>{' '}
-                                        {date.toDateString()}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
-                    <div className='intro-right'>
-                    <h2>TODO: pfp</h2>
+        <>
+        <nav>
+                <div class="topnav">
+                    <div>
+                        <Link to="/">Create</Link>
+                    </div>
+                    <div>
+                        <Link to="/Participant">Participant</Link>
+                    </div>
+                    <div>
+                        <Link to="/OrgParticipant">Results</Link>
+                    </div>
+                    <div className="theme-selector">
+                        <p>Themes</p>
+                        <select
+                            value={themeOptions}
+                            onChange={(event) => changeTheme(event.target.value)}
+                        >
+                            <option value="Light">Light</option>
+                            <option value="Dark">Dark</option>
+                        </select>
+
+                    </div>
+
                 </div>
-            </div>
-        </div>
-    );
+        </nav>
+        <Routes>
+            <Route path="/" element={<Create />} />
+            <Route path="/Participant" element={<Part />} />
+            <Route path="/OrgParticipant" element={<Results />} />
+        </Routes>
+        </>
+    )
 }
 
 export default App;

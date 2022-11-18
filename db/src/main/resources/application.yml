@@ -1,0 +1,13 @@
+#Backend Database configurations for relevance weighted meeting scheduler
+
+springcloud:
+  config:
+    enabled: false
+
+embeddedDataSourse:
+  url: jdbc:derby:directory:mydb;create=true
+  transactional: true
+
+spring:
+  datasource:
+    initialization-mode: never
