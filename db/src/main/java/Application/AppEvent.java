@@ -9,6 +9,7 @@ public class AppEvent{
     private int p_id; //participant id
     private Map<Timestamp, Float> calendar; //calendar data
 
+
     public AppEvent(){
         this.e_id = 0;
         this.p_id = 0;
@@ -48,4 +49,5 @@ public class AppEvent{
     public void addlineMap(Map<Timestamp, Float> calendar){
         this.calendar.putAll(calendar);
     }
+
 }

@@ -12,10 +12,4 @@ public class BackendDatabaseApplication {
 		SpringApplication.run(BackendDatabaseApplication.class, args);
 	}
 
-	@Bean
-	@Autowired
-	EmbeddedService localservice(){
-		return new EmbeddedService();
-	}
-
 }

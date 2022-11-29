@@ -5,20 +5,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/database")
 @Slf4j
-@Transactional
+//@Transactional
 public class EmbeddedService {
 
     @Autowired
@@ -26,13 +29,31 @@ public class EmbeddedService {
     JdbcTemplate localtemplate;
 
     //getting data
+    //getting all timeslots for organizer
+    static final String getAllCalendar = "SELECT timeslot"
+                                        + " FROM CALENDAR"
+                                        + " WHERE event_id = ?"
+                                        + " GROUP BY TIMESLOT";
+    //getting all availability for organizer
+    static final String getAllAvailability= "SELECT sum(availability)/count(participant_id) AS totalavailability"
+                                        + " FROM CALENDAR"
+                                        + " WHERE event_id = ?"
+                                        + " GROUP BY TIMESLOT";
 
+    static final String getAllCalendarWAva = "SELECT timeslot, sum(availability)/count(participant_id) AS totalavailability"
+                                        + " FROM CALENDAR"
+                                        + " WHERE event_id = ?"
+                                        + " GROUP BY TIMESLOT";
     //participant name given participant id
-    static final String getParticipantName = "select name from participants where id = ?";
+    static final String getParticipantName = "select p_name from participants where id = ?";
+    //get all participant names
+    static final String getParticipantList = "select id, p_name from participants";
     //organizer name given organizer id
     static final String getOrganizerName = "select name from organizer where id = ?";
     //participant calendar given event id and participant id
-    static final String getCalendarOfParticipant = "select timeslot, availability from calendar where event_id = ? and participant_id = ?";
+    static final String getCalendarOfParticipant = "select timeslot, availability from calendar where participant_id = ?";
+    //event name given event id
+    static final String getEventName = "select event_name from event where event_id = ?";
 
     //adding data
     //add given participant name
@@ -42,7 +63,7 @@ public class EmbeddedService {
     //add new event based on organizer name
     static final String addOrganizer = "insert into organizer values(?, ?, ?)";
 
-    static final String addEvent = "insert into event values(?,?,?)";
+    static final String addEvent = "insert into event values(?,?,?,?)";
 
     //deleting event
     //delete rows based on event id
@@ -66,14 +87,15 @@ public class EmbeddedService {
         localtemplate.update(addOrganizer, tempo.getId(), tempo.getEvent_id(), tempo.getName());
     }
 
-    public void addNewEvent(String startdate, String enddate, int e_id){
-        log.info("\nthe new event starts from " + startdate + " and ends on " + enddate + " for Event #" + e_id + "\n");
-        localtemplate.update(addEvent, e_id, Timestamp.valueOf(startdate), Timestamp.valueOf(enddate));
+    //@PostMapping("/Events/{id}")
+    public void addNewEvent(String startdate, String enddate, int e_id, String e_name){
+        log.info("\nthe new event starts from " + startdate + " and ends on " + enddate + " for Event #" + e_id + "with name: "  + e_name + "\n");
+        localtemplate.update(addEvent, e_id, Timestamp.valueOf(startdate), Timestamp.valueOf(enddate), e_name);
     }
 
-    @RequestMapping(value = "/CalendarOfParticipant", method = RequestMethod.GET)
-    public AppEvent getCOfP(int e_id, int p_id){
-        log.info("\ngetting calendar of event " + e_id + " of participant " + p_id + "\n");
+    @RequestMapping(value = "/CalendarOfP/{p_id}", method = RequestMethod.GET)
+    public AppEvent getCOfP(@PathVariable("p_id") int p_id){
+        log.info("\ngetting calendar of participant " + p_id+ "\n");
         List<Map<Timestamp, Float>> templ = localtemplate.query(getCalendarOfParticipant, new RowMapper<Map<Timestamp, Float>>(){
             @Override
             public Map<Timestamp, Float> mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -81,11 +103,105 @@ public class EmbeddedService {
                 tempm.put(rs.getTimestamp(1), rs.getFloat(2));
                 return tempm;
             }
-        }, e_id, p_id);
-        AppEvent tempe = new AppEvent(e_id, p_id);
+        }, p_id);
+        AppEvent tempe = new AppEvent(1, p_id);
         for(int i = 0; i < templ.size(); i++){
             tempe.addlineMap(templ.get(i));
         }
         return tempe;
+    }
+
+    @GetMapping("/CalendarName/{e_id}")
+    public List<Event_ID_Name>getE_Name(@PathVariable("e_id")int e_id){
+        log.info("\ngetting event name of event id:" + e_id);
+        String output = localtemplate.queryForObject(getEventName, new Object[]{Integer.valueOf(e_id)} , (rs, rowNum) -> {
+            return new String(rs.getString(1));
+        });
+        Event_ID_Name temp = new Event_ID_Name(e_id, output);
+        log.info("Name: "+ output + "\n");
+        return Arrays.asList(temp);
+    }
+
+    @GetMapping("test1")
+    public List<Event_ID_Name> test(){
+        return Arrays.asList(new Event_ID_Name(2, "test2"));
+    }
+
+    @GetMapping("/ParticipantList")
+    public List<Participant> getPList(){
+        log.info("Getting List of Participants");
+        List<Participant> list = localtemplate.query(getParticipantList, new RowMapper() {
+            @Override
+            public Participant mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Participant tempp = new Participant(rs.getInt(1), rs.getString(2));
+                return tempp;
+            }
+        });
+        return list;
+    }
+
+    @GetMapping("test2")
+    public List<String> test2(){
+        return Arrays.asList("1", "2", "3");
+    }
+
+    @GetMapping("/alltime/{e_id}")
+    public List<Timestamp> getalltime(@PathVariable("e_id")int e_id) {
+        log.info("getting all times for organizer to view");
+        List<Timestamp> output = localtemplate.query(getAllCalendar, new RowMapper() {
+            @Override
+            public Timestamp mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getTimestamp(1);
+            }
+        }, e_id);
+        return output;
+    }
+
+    @GetMapping("/allava/{e_id}")
+    public List<Float> getallava(@PathVariable("e_id")int e_id) {
+        log.info("getting all availabilities for organizer to view");
+        List<Float> output = localtemplate.query(getAllAvailability, new RowMapper() {
+            @Override
+            public Float mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getFloat(1);
+            }
+        }, e_id);
+        return output;
+    }
+
+    @GetMapping("/alltime/test/{e_id}")
+    public List<TimeStampObj> getalltimetest(@PathVariable("e_id")int e_id) {
+        log.info("getting all times for organizer to view");
+        List<TimeStampObj> output = localtemplate.query(getAllCalendar, new RowMapper() {
+            @Override
+            public TimeStampObj mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new TimeStampObj(rs.getTimestamp(1));
+            }
+        }, e_id);
+        return output;
+    }
+
+    @GetMapping("/allava/test/{e_id}")
+    public List<FloatObj> getallavatest(@PathVariable("e_id")int e_id) {
+        log.info("getting all availabilities for organizer to view");
+        List<FloatObj> output = localtemplate.query(getAllAvailability, new RowMapper() {
+            @Override
+            public FloatObj mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new FloatObj(1, rs.getFloat(1));
+            }
+        }, e_id);
+        return output;
+    }
+
+    @GetMapping("/getevents/{e_id}")
+    public List<Events> getallevents(@PathVariable("e_id")int e_id){
+        log.info("Getting all events for organizer to view");
+        List<Events> output = localtemplate.query(getAllCalendarWAva, new RowMapper<Events>() {
+            @Override
+            public Events mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Events(rs.getTimestamp(1),rs.getFloat(2));
+            }
+        }, e_id);
+        return output;
     }
 }

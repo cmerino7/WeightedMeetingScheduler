@@ -1,20 +1,13 @@
 ----------------------------------------------------------------
-Wed Oct 12 13:12:12 PDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0183-cdd3-7a16-000002121128
-on database directory D:\Desktop\Fall2022\CSE120\DataBaseConnection\mydbdirectory with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@63947c6b
-Loaded from file:/C:/Users/ew226/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-java.vendor=Oracle Corporation
-java.runtime.version=17.0.1+12-LTS-39
-user.dir=D:\Desktop\Fall2022\CSE120\DataBaseConnection
-Tue Nov 15 20:07:29 PST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-7e9e-d6f2-000001420fd0
-on database directory D:\Desktop\Fall2022\CSE120\DataBase\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e
-Loaded from file:/C:/Users/ew226/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
-java.vendor=Oracle Corporation
-java.runtime.version=17.0.1+12-LTS-39
-user.dir=D:\Desktop\Fall2022\CSE120\DataBase
-os.name=Windows 10
+Mon Nov 28 20:03:07 PST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-c18d-8246-00000348cb90 
+on database directory /home/alvin/Desktop/CSE120/relevance_weighted_meeting_scheduler/db/mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5cb0d902 
+Loaded from file:/home/alvin/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
+java.vendor=Private Build
+java.runtime.version=17.0.5+8-Ubuntu-2ubuntu122.04
+user.dir=/home/alvin/Desktop/CSE120/relevance_weighted_meeting_scheduler/db
+os.name=Linux
 os.arch=amd64
-os.version=10.0
+os.version=5.15.0-53-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

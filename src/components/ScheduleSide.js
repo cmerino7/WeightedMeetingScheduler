@@ -12,13 +12,19 @@ class Homepage extends React.Component{
     constructor(props)
     {
         super(props);
-        this.state = { currentName: "test"}
-        this.state = {isLoggedIn : false};
+        this.state = {
+            isLoggedIn : false,
+            currentName: "test" //SEND THIS TO BACKEND
+        };
  
         this.loginClicked = this.loginClicked.bind(this);
         this.logoutClicked = this.logoutClicked.bind(this);
     }
  
+    callbackFunction = (childData) => { //Sends callback to get Participant Name
+        this.setState({ currentName: childData });
+    }
+
     loginClicked()    {
         this.setState({isLoggedIn : true});
     }
@@ -31,13 +37,13 @@ class Homepage extends React.Component{
         const {currentName} = this.state;
          return(
              <div>
-                 <Message isLoggedIn = {this.state.isLoggedIn} name={currentName}/>
+                 <Message isLoggedIn={this.state.isLoggedIn} name={this.state.currentName}/>
                 { 
                     (this.state.isLoggedIn)?(
                     <div>
                     <Logout onClickFunc = {this.logoutClicked} />
                         <div className='Slider'>
-                            <p>Select Availability:</p>
+                            <p>Select Availability: </p>
                             <div className="ScheduleSelector">
                                 <Appp
                                 // calendar={calendar}
@@ -47,7 +53,7 @@ class Homepage extends React.Component{
                         </div>
                     </div>
                     ) : (
-                    <Login onClickFunc = {this.loginClicked} />
+                        <Login onClickFunc = {this.loginClicked} parentCallback = {this.callbackFunction} />
                     )
                 }
             </div>

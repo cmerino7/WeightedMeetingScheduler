@@ -13,27 +13,32 @@ class Login extends React.Component {
       
     }
 
+    sendData = () => { 
+      this.props.parentCallback(this.state.value); 
+      this.props.onClickFunc();
+      console.log("FROM LOGIN CHILD", this.state.value)
+    }
+
     handleChange(event) {    
-        this.setState({value: event.target.value});  
+      this.setState({value: event.target.value});  
     }
     
     handleSubmit(event) {
       alert('A name was submitted: ' + this.state.value);
       //send the name to backend
       event.preventDefault();
+
     }
     render() {
       //const data = {};
       return (
         
-        <form onSubmit={this.props.onClickFunc} > 
-        {/* <form onSubmit={this.handleSubmit}>    use this to handle events later   */}
+        <form onSubmit={this.sendData} > 
             <label>
                 Name:
-                <input type="text" value={this.state.value} onChange={this.handleChange} />    
+                <input type="text" value={this.state.value} onChange={this.handleChange}/>    
             </label>
           <input type="submit" value="Submit" />
-          {/* <Message data={data}/> */}
         </form>
       );
     }

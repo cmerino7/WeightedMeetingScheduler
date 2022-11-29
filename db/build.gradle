@@ -32,7 +32,10 @@ dependencies {
 	//embedded database
 	implementation 'org.springframework.boot:spring-boot-starter'
 	runtimeOnly 'org.apache.derby:derby'
+
+	testImplementation 'io.projectreactor:reactor-test'
 }
+
 
 test {
 	useJUnitPlatform()
