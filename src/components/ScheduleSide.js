@@ -43,7 +43,6 @@ class Homepage extends React.Component{
                     <div>
                     <Logout onClickFunc = {this.logoutClicked} />
                         <div className='Slider'>
-                            <p>Select Availability: </p>
                             <div className="ScheduleSelector">
                                 <Appp
                                 // calendar={calendar}

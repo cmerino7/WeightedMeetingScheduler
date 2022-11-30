@@ -16,7 +16,7 @@ class Appp extends React.Component {
         super(props);
         this.state = {
             event: "",
-            val: "",
+            val: "50",
             events: [],
             //id: 10,
             id: [],
@@ -26,31 +26,34 @@ class Appp extends React.Component {
         };
     }
 
-    myBool(boo){ //doesnt work :(
-        if(boo){return true}
-        else{return false}
-    }
-
     myClick(date) {
         const newStartDate = new Date()
-        newStartDate.setHours(date.getHours() - 1)
-        newStartDate.setMinutes(0)
+        if(date.getMinutes() === 0){
+            newStartDate.setHours(date.getHours() - 1)
+        } else {
+            newStartDate.setHours(date.getHours())
+        }
+        newStartDate.setMinutes(date.getMinutes() - 15)
         newStartDate.setDate(date.getDate())
 
         const newEndDate = new Date()
         newEndDate.setHours(date.getHours())
-        newEndDate.setMinutes(0)
+        newEndDate.setMinutes(date.getMinutes())
         newEndDate.setDate(date.getDate())
+
+        if(newEndDate.getHours() - newStartDate.getHours() > 1){
+            newStartDate.setHours(newStartDate.getHours() + 1);
+        }
 
         var colorNum;
         var colorsel;
 
-        while(true){
+        while(true){        //Do something with these colors ig
             colorNum = this.state.val;
             //console.log("cN",colorNum)
             let c = colorNum/100*255;
             //console.log("c",c)
-            if(c == "0"){
+            if(c < 0){
                 colorsel = "#C9C9C9"
                 //colorsel = colorScheme5
                 break;
@@ -110,7 +113,10 @@ class Appp extends React.Component {
             max: 100,
             step: 1,
             thumbLabel: true,
-            // tick: 1,
+            value: 50,
+            label: "Set Availability:",      
+            
+            tick: 100,
             // majorTick: 10,
             tickTemplate: v => v,
         });
@@ -130,7 +136,7 @@ class Appp extends React.Component {
             <div className="Appp">
             {/* Slider Component Start */}
                 <div className="Slider">
-                    <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}></div>
+                    <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}>asdasd</div>
                     {/* Delete these next five lines */}
                     <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
                         <button className="button button--bordered">{`Event: ${this.state.event}`}</button>
@@ -146,17 +152,17 @@ class Appp extends React.Component {
             day={null}
             month={null}
             onDelete={(id) => this.delEvent(id)}
-            customEditor={(e) => <Popover
-                open={Boolean(this.myBool)}
-                anchorReference={this.currentTarget}
-                anchorOrigin={{vertical: "center", horizontal:"center"}}>
-            </Popover>}
+            // customEditor={(e) => <Popover
+            //     open={Boolean(this.myBool)}
+            //     anchorReference={this.currentTarget}
+            //     anchorOrigin={{vertical: "center", horizontal:"center"}}>
+            // </Popover>}
             week={{
                 weekDays: [0, 1, 2, 3, 4, 5],
                 weekStartOn: 6,
-                startHour: 9,
-                endHour: 17,
-                step: 60,
+                startHour: 8,
+                endHour: 13,
+                step: 15,
 
                 cellRenderer: ({ height, start, onClick, ...props }) => {
                     // Fake some condition up
@@ -173,7 +179,7 @@ class Appp extends React.Component {
                             }}
                             onClick={(e) => {
                                 const ex = new Date(e.target.getAttribute("end"));
-                                this.myBool(false);
+                                // this.myBool(false);
                                 this.myClick(ex);
                             }}
                             disableRipple={disabled}

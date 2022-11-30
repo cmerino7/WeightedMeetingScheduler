@@ -24,7 +24,6 @@ class OrgParticipant extends Component{
             availability: [],
             events: [],
             value: 69, //THIS SHOULD BE SET FROM BACKEND(CURRENT PARTICIPANT WEIGHT)
-            stop: 0 //temporary limiter on handling events
         }
     }
     
@@ -77,30 +76,21 @@ class OrgParticipant extends Component{
 
 	    }, this);
 
- 
-
         //this.setState({events: {start: parseISO(this.state.events.start), end: parseISO(this.state.events.end)}})
 
         const {events} = this.state;
         console.log({events})
 
-        //bruh this shit laggy af so im limiting it to 30 for now
-        if (this.state.stop !== 30){
-            for(let i = 0; i < events.length; i++){
+        if (events.length > 0 && !(events[0] instanceof Date)) {
+            var id = 0;
+            for (let i = 0; i < events.length; i++) {
+                events[i].event_id = ++id;
                 events[i].start = new Date(events[i].start)
                 events[i].end = new Date(events[i].end)
-
-                //temporary color scheme
-                events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0)"
-
-
-                console.log("color",events[i].availability*255)
-                this.setState(
-                    { events: events }
-                )
+                events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0)" //EDIT COLOR HERE
             }
-            this.setState({stop: this.state.stop+1})
         }
+
         return(
             <div className="orgParticipant">
                 <div className="page-body">
@@ -135,7 +125,14 @@ class OrgParticipant extends Component{
         />
 
 
-        <Scheduler events = {events}>
+        <Scheduler 
+            events = {events}
+            week={{
+                weekDays: [0, 1, 2, 3, 4, 5],
+                weekStartOn: 6,
+                startHour: 8,
+                endHour: 13,
+                step: 15}}>
 
         </Scheduler>
                 </div>
