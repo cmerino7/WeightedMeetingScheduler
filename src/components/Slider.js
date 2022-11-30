@@ -31,7 +31,7 @@ class Slider extends Component{
       });
       // this.sendData();
       // console.log("sending data from child")
-      this.slider.events.on("change", val => this.setState({ event: "change", val: val }));
+      this.slider.events.on("change", val => {this.setState({ event: "change", val: val });this.sendData()});
       this.slider.events.on("mousedown", val => this.setState({ event: "mousedown" }));
       this.slider.events.on("mouseup", val => this.sendData());
   }
@@ -44,7 +44,7 @@ class Slider extends Component{
       return (
         <div>
           <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center", margin: "auto" }}></div>
-          <div>inside child--data from parent: {this.props.dataFromParent}</div></div>
+        </div>
       )
   }
 }

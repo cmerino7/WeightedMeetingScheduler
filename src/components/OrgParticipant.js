@@ -87,7 +87,7 @@ class OrgParticipant extends Component{
                 events[i].event_id = ++id;
                 events[i].start = new Date(events[i].start)
                 events[i].end = new Date(events[i].end)
-                events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0)" //EDIT COLOR HERE
+                events[i].color = "rgb("+(255-(events[i].availability*255)-(this.state.value*255/100))+",190,0)" //EDIT COLOR HERE
             }
         }
 
@@ -106,10 +106,10 @@ class OrgParticipant extends Component{
                         ))}<p id="event-name"> </p>
 
                 </h1>
-                <h2>
+                <p>
                     {}
                     Please use the slider to change participant's relevance-weight <p id="event-name"></p>
-                </h2>
+                </p>
                 {}
 
                 </header>
@@ -118,7 +118,6 @@ class OrgParticipant extends Component{
             <select name="individual" id="participant">
                 {dataList}
         </select>
-        testing inside parent value: {this.state.value}
         <Slider
           dataFromParent = {this.state.value}      //data to child
           parentCallback = {this.callbackFunction} //data from child
