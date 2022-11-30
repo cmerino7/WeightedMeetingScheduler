@@ -45,6 +45,7 @@ class Homepage extends React.Component{
                         <div className='Slider'>
                             <div className="ScheduleSelector">
                                 <Appp
+                                   dataFromParent = {this.state.currentName}
                                 // calendar={calendar}
                                 // handleSubmitCalendar={handleSubmitCalendar}
                                 />

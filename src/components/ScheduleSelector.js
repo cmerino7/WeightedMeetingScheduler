@@ -20,7 +20,7 @@ class Appp extends React.Component {
             events: [],
             //id: 10,
             id: [],
-            
+            currentName: props.dataFromParent,
             count: 20,
             countid: 0,
         };
@@ -136,6 +136,7 @@ class Appp extends React.Component {
             <div className="Appp">
             {/* Slider Component Start */}
                 <div className="Slider">
+                    CURRENT NAME TEST: {this.props.dataFromParent}
                     <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}>asdasd</div>
                     {/* Delete these next five lines */}
                     <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
