@@ -108,6 +108,12 @@ class Appp extends React.Component {
 
     //Slider Component Start
     componentDidMount() {
+        let url = "http://localhost:8080/database/CalendarOfP/" + this.state.currentName
+        fetch(url)
+            .then(res => res.json())
+            .then(json => this.setState({ events: json }))
+            .then(output => console.log("getting all availabilities")) 
+
         this.slider = new SliderDHX(this.el, {
             min: 0,
             max: 100,
@@ -132,12 +138,24 @@ class Appp extends React.Component {
     //Slider Component End
 
     render() {
+        const {events} = this.state;
+        console.log({events})
+
+        if (events.length > 0 && !(events[0] instanceof Date)) {
+            var id = 0;
+            for (let i = 0; i < events.length; i++) {
+                events[i].event_id = ++id;
+                events[i].start = new Date(events[i].start)
+                events[i].end = new Date(events[i].end)
+                events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0)" //EDIT COLOR HERE
+            }
+        }
         return (
             <div className="Appp">
             {/* Slider Component Start */}
                 <div className="Slider">
                     CURRENT NAME TEST: {this.props.dataFromParent}
-                    <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}>asdasd</div>
+                    <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}></div>
                     {/* Delete these next five lines */}
                     <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
                         <button className="button button--bordered">{`Event: ${this.state.event}`}</button>

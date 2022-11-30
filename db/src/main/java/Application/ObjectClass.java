@@ -62,6 +62,7 @@ class FloatObj{
 
 class Events{
     int event_id = 0;
+
     String title = "demo";
 
     Timestamp start;
@@ -72,6 +73,7 @@ class Events{
 
     public Events(){}
     public Events(Timestamp start, float availability){this.start = start; this.end = calc(start);this.availability = availability;}
+    public Events(int id, Timestamp start, float availability){this.event_id = id; this.start = start; this.end = calc(start);this.availability = availability;}
 
     public int getEvent_id() {
         return event_id;
@@ -96,7 +98,7 @@ class Events{
     private Timestamp calc(Timestamp time){
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(time.getTime());
-        cal.add(Calendar.HOUR,1);
+        cal.add(Calendar.MINUTE,15);
         java.sql.Timestamp ts_new_date_ws = new java.sql.Timestamp(cal.getTime().getTime());
         return ts_new_date_ws;
     }
