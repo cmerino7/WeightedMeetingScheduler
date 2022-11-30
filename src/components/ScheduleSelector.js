@@ -55,7 +55,7 @@ class Appp extends React.Component {
                 //colorsel = colorScheme5
                 break;
             }else{
-                colorsel = "rgb("+(255-c)+","+(c)+",0)";
+                colorsel = "rgb("+(255-c)+",190,0)";
                 // window.alert("error try again!!")
                 break;
             }

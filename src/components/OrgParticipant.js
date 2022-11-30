@@ -23,56 +23,49 @@ class OrgParticipant extends Component{
             times: [],
             availability: [],
             events: [],
-            value: "69" //THIS SHOULD BE SET FROM BACKEND(CURRENT PARTICIPANT WEIGHT)
+            value: 69, //THIS SHOULD BE SET FROM BACKEND(CURRENT PARTICIPANT WEIGHT)
+            stop: 0 //temporary limiter on handling events
         }
-        // console.log("CONST CALLED")
-
-
     }
     
     callbackFunction = (childData) => { //when slider is moved, will update this state
         this.setState({ value: childData });
-        // console.log("parent callback called", childData)
-        // console.log(this.state.value, v); this sends a callback to child to get slider value
-    };
+     };
 
     componentDidMount() { 
-            fetch("http://localhost:8080/database/ParticipantList")
-                .then(res => res.json())
-                .then(json => this.setState({ list: json }))
+        fetch("http://localhost:8080/database/ParticipantList")
+            .then(res => res.json())
+            .then(json => this.setState({ list: json }))
 
-            fetch("http://localhost:8080/database/CalendarName/1")
-                .then(res => res.json())
-                .then(json => this.setState({data: json}))
+        fetch("http://localhost:8080/database/CalendarName/1")
+            .then(res => res.json())
+            .then(json => this.setState({data: json}))
 
-            fetch("http://localhost:8080/database/alltime/test/1")
-                .then(res => res.json())
-                .then(json => this.setState({ times: json }))
-                .then(output => console.log("getting all times"))
+        fetch("http://localhost:8080/database/alltime/test/1")
+            .then(res => res.json())
+            .then(json => this.setState({ times: json }))
+            .then(output => console.log("getting all times"))
 
-            fetch("http://localhost:8080/database/allava/test/1")
-                .then(res => res.json())
-                .then(json => this.setState({ availability: json }))
-                .then(output => console.log("getting all availabilities"))
+        fetch("http://localhost:8080/database/allava/test/1")
+            .then(res => res.json())
+            .then(json => this.setState({ availability: json }))
+            .then(output => console.log("getting all availabilities"))
 
-            fetch("http://localhost:8080/database/getevents/1")
-                .then(res => res.json())
-                .then(json => this.setState({ events: json }))
-                .then(output => console.log("getting all availabilities")) 
-        
+        fetch("http://localhost:8080/database/getevents/1")
+            .then(res => res.json())
+            .then(json => this.setState({ events: json }))
+            .then(output => console.log("getting all availabilities")) 
     }
 
     render(){
 
-        const { classes } = this.props;
-        const { value } = this.state;
         const { list } = this.state;
-        console.log("list",{ list}, typeof({list}))
         const { times } = this.state;
-        console.log("times",{times}, typeof({times}))
         const { availability } = this.state;
-
-        console.log("avail",{availability}, typeof({availability}))
+        
+        console.log("list",{list})
+        console.log("times",{times})
+        console.log("avail",{availability})
 
 
 	    let dataList = list.length > 0 && list.map((item, i) => {
@@ -91,19 +84,23 @@ class OrgParticipant extends Component{
         const {events} = this.state;
         console.log({events})
 
-        //bruh this shit laggy af
-        // if ({events}!==this.state.events){
-            // for(let i = 0; i < events.length; i++){
+        //bruh this shit laggy af so im limiting it to 30 for now
+        if (this.state.stop !== 30){
+            for(let i = 0; i < events.length; i++){
+                events[i].start = new Date(events[i].start)
+                events[i].end = new Date(events[i].end)
 
-            //     events[i].start = new Date(events[i].start)
-            //     events[i].end = new Date(events[i].end)
+                //temporary color scheme
+                events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0)"
 
-                // this.setState(
-                //     { events: events }
-                // )
-            // }
-        // }
-        console.log(this.state.events)
+
+                console.log("color",events[i].availability*255)
+                this.setState(
+                    { events: events }
+                )
+            }
+            this.setState({stop: this.state.stop+1})
+        }
         return(
             <div className="orgParticipant">
                 <div className="page-body">
