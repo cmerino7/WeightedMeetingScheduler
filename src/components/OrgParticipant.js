@@ -10,7 +10,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Slider as SliderDHX } from "dhx-suite";
 import "dhx-suite/codebase/suite.min.css";
-
+import './ScheduleSelector.css';
 
 
 
@@ -125,13 +125,26 @@ class OrgParticipant extends Component{
 
 
         <Scheduler 
+            height={300}
             events = {events}
             week={{
                 weekDays: [0, 1, 2, 3, 4, 5],
                 weekStartOn: 6,
                 startHour: 8,
                 endHour: 13,
-                step: 15}}>
+                step: 15}}
+            eventRenderer={() => {
+                return (
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                            height: "50%"}}>
+                    </div>
+                );
+            }}
+                >
 
         </Scheduler>
                 </div>

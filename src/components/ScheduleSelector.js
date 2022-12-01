@@ -5,7 +5,7 @@ import { Scheduler } from "@aldabil/react-scheduler";
 import PropTypes from "prop-types";
 import { Slider as SliderDHX } from "dhx-suite";
 import "dhx-suite/codebase/suite.min.css";
-
+import "./ScheduleSelector.css"
 //import { EVENTS } from "./events";
 import { Button } from "@mui/material";
 import { Popover } from "@mui/material";
@@ -124,7 +124,7 @@ class Appp extends React.Component {
             
             tick: 50,
             majorTick: 10,
-            tickTemplate: v => v,
+            //tickTemplate: v => v,
         });
 
         this.slider.events.on("change", val => this.setState({ event: "change", val: val }));
@@ -154,7 +154,16 @@ class Appp extends React.Component {
             <div className="Appp">
             {/* Slider Component Start */}
                 <div className="Slider">
+                    
                     <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}></div>
+                    <div className="avail-label"><div className="less">Less Available</div><div className="more">More Available</div></div>
+                    
+                    
+                    
+                    
+
+                    
+                    
                     {/* Delete these next five lines */}
                     {/* <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
                         <button className="button button--bordered">{`Event: ${this.state.event}`}</button>
@@ -164,12 +173,16 @@ class Appp extends React.Component {
                     </div> */}
                 </div>
             {/* Slider Component End */}
+            <div className="Scheduler">
             <Scheduler
+            height={100}
+            
             events={this.state.events}
             view="week"
             day={null}
             month={null}
             onDelete={(id) => this.delEvent(id)}
+            
             // customEditor={(e) => <Popover
             //     open={Boolean(this.myBool)}
             //     anchorReference={this.currentTarget}
@@ -181,7 +194,6 @@ class Appp extends React.Component {
                 startHour: 8,
                 endHour: 13,
                 step: 15,
-
                 cellRenderer: ({ height, start, onClick, ...props }) => {
                     // Fake some condition up
                     const hour = start.getHours();
@@ -208,7 +220,22 @@ class Appp extends React.Component {
                     );
                 }
             }}
+            eventRenderer={() => {
+                return (
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                            height: "50%",
+                        }}
+                    >
+                    </div>
+                );
+            }}
             />
+            </div>
+            
             </div>
         );
     }

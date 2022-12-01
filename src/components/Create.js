@@ -47,11 +47,13 @@ function CreateEvent() {
 
 
     const onTimeChange = (e) => {
-        if(e[0] != null){
+        var startTimeDate = " "
+        var endTimeDate = ""
+        if(Array.isArray(e)){
             const startDate = e[0].getDate();
             const startMonth = e[0].getMonth();
             const startYear = e[0].getFullYear();
-            dateTimeObject.startTimeDate = moment(dateTimeObject.startTimeDate).set({
+            startTimeDate = moment(dateTimeObject.startTimeDate).set({
                 'date': startDate,
                 'month': startMonth,
                 'year': startYear
@@ -60,17 +62,38 @@ function CreateEvent() {
             const endDate = e[1].getDate();
             const endMonth = e[1].getMonth();
             const endYear = e[1].getFullYear();
-            dateTimeObject.endTimeDate = moment(dateTimeObject.endTimeDate).set({
+            endTimeDate = moment(dateTimeObject.endTimeDate).set({
                 'date': endDate,
                 'month': endMonth,
                 'year': endYear
             })
 
+
         } else {
-            setTimeDate(e);
+            if(typeof e.startTime === "string"){
+                e.startTime = moment(e.startTime)
+                const hour = e.startTime.hour()
+                const minute = e.startTime.minute()
+                startTimeDate = moment(dateTimeObject.startTimeDate).set({
+                    'minute': minute,
+                    'hour': hour,
+                })
+            } else {
+                e.endTime = moment(e.endTime)
+                const hour = e.endTime.hour()
+                const minute = e.endTime.minute()
+                endTimeDate = moment(dateTimeObject.endTimeDate).set({
+                    'minute': minute,
+                    'hour': hour,
+                })
+            }
         }
-        // console.log(moment(dateTimeObject.startTimeDate).format())
-        // console.log(moment(dateTimeObject.endTimeDate).format())
+        setTimeDate({
+            startTimeDate: startTimeDate,
+            endTimedAte: endTimeDate,
+        })
+        console.log(moment(dateTimeObject.startTimeDate).format())
+        console.log(moment(dateTimeObject.endTimeDate).format())
     };
 
     const [eventName, setEventName] = useState('');
