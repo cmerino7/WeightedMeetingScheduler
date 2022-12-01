@@ -122,6 +122,7 @@ class OrgParticipant extends Component{
                     testing inside parent value: {this.state.value}
             <select className="select" name="individual" id="participant">
                 {dataDropDown}
+
         </select>
         <Slider className ="slider"
           dataFromParent = {this.state.value}      //data to child
