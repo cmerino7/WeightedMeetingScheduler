@@ -112,7 +112,7 @@ class Appp extends React.Component {
         // fetch(url)
         //     .then(res => res.json())
         //     .then(json => this.setState({ events: json }))
-        //     .then(output => console.log("getting all availabilities")) 
+        //     .then(output => console.log("getting all availabilities"))
 
         this.slider = new SliderDHX(this.el, {
             min: 0,
@@ -120,8 +120,8 @@ class Appp extends React.Component {
             step: 1,
             thumbLabel: true,
             value: 50,
-            label: "Set Your Availability:",      
-            
+            label: "Set Your Availability:",
+
             tick: 50,
             majorTick: 10,
             //tickTemplate: v => v,
@@ -152,18 +152,18 @@ class Appp extends React.Component {
         // }
         return (
             <div className="Appp">
-            {/* Slider Component Start */}
+                {/* Slider Component Start */}
                 <div className="Slider">
-                    
+
                     <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}></div>
                     <div className="avail-label"><div className="less">Less Available</div><div className="more">More Available</div></div>
-                    
-                    
-                    
-                    
 
-                    
-                    
+
+
+
+
+
+
                     {/* Delete these next five lines */}
                     {/* <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
                         <button className="button button--bordered">{`Event: ${this.state.event}`}</button>
@@ -172,72 +172,72 @@ class Appp extends React.Component {
                         </button>
                     </div> */}
                 </div>
-            {/* Slider Component End */}
-            <div className="Scheduler">
-            <Scheduler
-            height={100}
+                {/* Slider Component End */}
+                <div className="Scheduler">
+                    <Scheduler
+                        height={100}
             //height = "50pc"
-            
-            events={this.state.events}
-            view="week"
-            day={null}
-            month={null}
-            onDelete={(id) => this.delEvent(id)}
-            draggable = {0}
-            
-            // customEditor={(e) => <Popover
-            //     open={Boolean(this.myBool)}
-            //     anchorReference={this.currentTarget}
-            //     anchorOrigin={{vertical: "center", horizontal:"center"}}>
-            // </Popover>}
-            week={{
-                weekDays: [0, 1, 2, 3, 4, 5],
-                weekStartOn: 6,
-                startHour: 8,
-                endHour: 13,
-                step: 15,
-                cellRenderer: ({ height, start, onClick, ...props }) => {
-                    // Fake some condition up
-                    const hour = start.getHours();
-                    const disabled = hour === 14;
-                    const restProps = disabled ? {} : props;
-                    return (
-                        <>
-                        <Button
-                            style={{
-                                height: "100%",
+
+                        events={this.state.events}
+                        view="week"
+                        day={null}
+                        month={null}
+                        onDelete={(id) => this.delEvent(id)}
+                        draggable = {0}
+
+                        // customEditor={(e) => <Popover
+                        //     open={Boolean(this.myBool)}
+                        //     anchorReference={this.currentTarget}
+                        //     anchorOrigin={{vertical: "center", horizontal:"center"}}>
+                        // </Popover>}
+                        week={{
+                            weekDays: [0, 1, 2, 3, 4, 5],
+                            weekStartOn: 6,
+                            startHour: 8,
+                            endHour: 13,
+                            step: 15,
+                            cellRenderer: ({ height, start, onClick, ...props }) => {
+                                // Fake some condition up
+                                const hour = start.getHours();
+                                const disabled = hour === 14;
+                                const restProps = disabled ? {} : props;
+                                return (
+                                    <>
+                                        <Button
+                                            style={{
+                                                height: "100%",
                                 background: disabled ? "#eee" : "transparent",
                                 cursor: disabled ? "not-allowed" : "pointer"
-                            }}
-                            onClick={(e) => {
-                                const ex = new Date(e.target.getAttribute("end"));
-                                // this.myBool(false);
-                                this.myClick(ex);
-                            }}
-                            disableRipple={disabled}
-                            // disabled={disabled}
-                            {...restProps}></Button>
-                            
-                            </>
-                    );
-                }
-            }}
-            eventRenderer={() => {
-                return (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                            height: "50%",
+                                            }}
+                                            onClick={(e) => {
+                                                const ex = new Date(e.target.getAttribute("end"));
+                                                // this.myBool(false);
+                                                this.myClick(ex);
+                                            }}
+                                                disableRipple={disabled}
+                                            // disabled={disabled}
+                                            {...restProps}></Button>
+
+                                    </>
+                                );
+                            }
                         }}
-                    >
-                    </div>
-                );
-            }}
-            />
-            </div>
-            
+                        eventRenderer={() => {
+                            return (
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "space-between",
+                                        height: "50%",
+                                    }}
+                                >
+                                </div>
+                            );
+                        }}
+                    />
+                </div>
+
             </div>
         );
     }
