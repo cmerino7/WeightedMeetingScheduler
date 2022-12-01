@@ -26,12 +26,12 @@ class OrgParticipant extends Component{
             value: 69, //THIS SHOULD BE SET FROM BACKEND(CURRENT PARTICIPANT WEIGHT)
         }
     }
-    
+
     callbackFunction = (childData) => { //when slider is moved, will update this state
         this.setState({ value: childData });
      };
 
-    componentDidMount() { 
+    componentDidMount() {
         fetch("http://localhost:8080/database/ParticipantList")
             .then(res => res.json())
             .then(json => this.setState({ list: json }))
@@ -53,7 +53,7 @@ class OrgParticipant extends Component{
         fetch("http://localhost:8080/database/getevents/1")
             .then(res => res.json())
             .then(json => this.setState({ events: json }))
-            .then(output => console.log("getting all availabilities")) 
+            .then(output => console.log("getting all availabilities"))
     }
 
     render(){
@@ -61,15 +61,21 @@ class OrgParticipant extends Component{
         const { list } = this.state;
         const { times } = this.state;
         const { availability } = this.state;
-        
+
         console.log("list",{list})
         console.log("times",{times})
         console.log("avail",{availability})
 
 
-	    let dataList = list.length > 0 && list.map((item, i) => {
-		    return (
-                <option key={i} value={item.id}> {item.name} </option>
+	    let dataDropDown = list.length > 0 && list.map((item, i) => { return (
+                <option key={i} value={item.id}> {item.name} {item.weight} </option>
+                //add something here to update val state from db (individual weights)
+
+                )
+
+	    }, this);
+	    let dataList = list.length > 0 && list.map((item, i) => { return (
+                <li key={i} value={item.id}> {item.name} {item.weight} </li>
                 //add something here to update val state from db (individual weights)
 
                 )
@@ -115,8 +121,11 @@ class OrgParticipant extends Component{
                 </header>
 
 
-            <select name="individual" id="participant">
+            <ol>
                 {dataList}
+            </ol>
+            <select name="individual" id="participant">
+                {dataDropDown}
         </select>
         testing inside parent value: {this.state.value}
         <Slider
@@ -125,7 +134,7 @@ class OrgParticipant extends Component{
         />
 
 
-        <Scheduler 
+        <Scheduler
             events = {events}
             week={{
                 weekDays: [0, 1, 2, 3, 4, 5],
