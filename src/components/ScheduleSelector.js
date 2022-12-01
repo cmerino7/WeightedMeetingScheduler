@@ -80,6 +80,7 @@ class Appp extends React.Component {
             color: colorsel,
 
         })
+        console.log(table)
 
         this.setState({
             events: table,

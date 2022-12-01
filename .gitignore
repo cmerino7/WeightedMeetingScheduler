@@ -61,5 +61,5 @@ yarn-error.log*
 
 # Don't store log files
 *.log
-/db/mydb/log/
+/db/mydb/log/*
 /db/mybd/db.lck
