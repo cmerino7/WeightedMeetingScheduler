@@ -40,17 +40,18 @@ public class EmbeddedService {
                                         + " WHERE event_id = ?"
                                         + " GROUP BY TIMESLOT";
 
-    static final String getAllCalendarWAva = "SELECT timeslot, sum(availability)/count(participant_id) AS totalavailability"
-                                        + " FROM CALENDAR"
-                                        + " WHERE event_id = ?"
-                                        + " GROUP BY TIMESLOT";
+    static final String getAllCalendarWAva = "SELECT timeslot, sum(availability)*sum(weight)/count(participant_id) AS totalavailability"
+                                            + " FROM CALENDAR AS c, PARTICIPANTS AS p"
+                                            + " WHERE c.EVENT_ID  = ?"
+                                            + " AND c.PARTICIPANT_ID = p.ID"
+                                            + " GROUP BY c.TIMESLOT";
 
     //participant name given participant id
     static final String getParticipantName = "select p_name from participants where id = ?";
     //participant id given participant name
     static final String getPArticipantId = "select id from participants where p_name = ?";
     //get all participant names
-    static final String getParticipantList = "select id, p_name from participants";
+    static final String getParticipantList = "select id, p_name, weight from participants";
     //organizer name given organizer id
     static final String getOrganizerName = "select name from organizer where id = ?";
 
@@ -82,6 +83,7 @@ public class EmbeddedService {
         localtemplate.update(addParticipantName, tempp.getId(), tempp.getName());
     }
 
+    
     public void addTime(int p_id, Timestamp time, int e_id, Float availability){
         log.info("\nadding time for participant " + p_id + " at time: " + time + "with availability of " + availability + " to event " + e_id + "\n");
         localtemplate.update(addAvailabilityForParticipant, p_id, time, e_id, availability);
@@ -143,7 +145,7 @@ public class EmbeddedService {
         List<Participant> list = localtemplate.query(getParticipantList, new RowMapper() {
             @Override
             public Participant mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Participant tempp = new Participant(rs.getInt(1), rs.getString(2));
+                Participant tempp = new Participant(rs.getInt(1), rs.getString(2), rs.getFloat(3));
                 return tempp;
             }
         });
