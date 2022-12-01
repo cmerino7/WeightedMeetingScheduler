@@ -57,7 +57,48 @@ class Appp extends React.Component {
                 colorsel = "#C9C9C9"
                 //colorsel = colorScheme5
                 break;
-            }else{
+            }
+            else if (c > "0" && c <= "10"){
+                colorsel = "#ff5614"
+                break;
+            }
+            else if (c > "10" && c <= "20"){
+                colorsel = "#ff8555"
+                break;
+            }
+            else if (c > "20" && c <= "30"){
+                colorsel = "#ffb496"
+                break;
+            }
+            else if (c > "30" && c <= "40"){
+                colorsel = "#fdcebc"
+                break;
+            }
+            else if(c > "40" && c <= "50"){
+                colorsel = "#C9C9C9"
+                break;
+            }
+            else if(c > "50" && c <= "60"){
+                colorsel = "#bbffbc"
+                break;
+            }
+            else if(c > "60" && c <= "70"){
+                colorsel = "#8cff8d"
+                break;
+            }
+            else if(c > "70" && c <= "80"){
+                colorsel = "#63fd66"
+                break;
+            }
+            else if(c > "80" && c <= "90"){
+                colorsel = "#36ff39"
+                break;
+            }
+            else if(c > "90" && c <= "100"){
+                colorsel = "#00ff04"
+                break;
+            }
+            else{
                 colorsel = "rgb("+(255-c)+",190,0)";
                 // window.alert("error try again!!")
                 break;
