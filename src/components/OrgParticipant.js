@@ -119,7 +119,7 @@ class OrgParticipant extends Component{
                      <p id="event-name"></p>
                      
                     </h2>
-                    testing inside parent value: {this.state.value}
+                    
             <select className="select" name="individual" id="participant">
                 {dataDropDown}
 
@@ -142,8 +142,8 @@ class OrgParticipant extends Component{
                 weekStartOn: 6,
                 startHour: 8,
                 endHour: 13,
-                step: 15}}>
-
+                step: 15}}>     
+                
         </Scheduler>
         </div>
         </div>
