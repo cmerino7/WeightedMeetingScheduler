@@ -27,7 +27,8 @@ body {
 
   }
   .participant-header h2{
-    font-size: 20px;
+    font-size: 15px;
+    margin: 25px;
   }
   .content{
     font-size: 15px;
@@ -52,7 +53,11 @@ body {
 }
 
 
+.style{
+  float:left;
+ 
 
+}
 
 
 
