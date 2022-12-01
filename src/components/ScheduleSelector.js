@@ -27,7 +27,7 @@ class Appp extends React.Component {
     }
 
     myClick(date) {
-        const newStartDate = new Date()
+        const newStartDate = new Date(date)
         if(date.getMinutes() === 0){
             newStartDate.setHours(date.getHours() - 1)
         } else {
@@ -36,7 +36,7 @@ class Appp extends React.Component {
         newStartDate.setMinutes(date.getMinutes() - 15)
         newStartDate.setDate(date.getDate())
 
-        const newEndDate = new Date()
+        const newEndDate = new Date(date)
         newEndDate.setHours(date.getHours())
         newEndDate.setMinutes(date.getMinutes())
         newEndDate.setDate(date.getDate())
@@ -176,12 +176,14 @@ class Appp extends React.Component {
             <div className="Scheduler">
             <Scheduler
             height={100}
+            //height = "50pc"
             
             events={this.state.events}
             view="week"
             day={null}
             month={null}
             onDelete={(id) => this.delEvent(id)}
+            draggable = {0}
             
             // customEditor={(e) => <Popover
             //     open={Boolean(this.myBool)}
