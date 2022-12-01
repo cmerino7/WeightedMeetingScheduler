@@ -27,8 +27,8 @@ class Appp extends React.Component {
     }
 
     myClick(date) {
-        const newStartDate = new Date()
-        if(date.getMinutes() === 0){
+        const newStartDate = new Date(date)
+        if (date.getMinutes() === 0) {
             newStartDate.setHours(date.getHours() - 1)
         } else {
             newStartDate.setHours(date.getHours())
@@ -36,29 +36,29 @@ class Appp extends React.Component {
         newStartDate.setMinutes(date.getMinutes() - 15)
         newStartDate.setDate(date.getDate())
 
-        const newEndDate = new Date()
+        const newEndDate = new Date(date)
         newEndDate.setHours(date.getHours())
         newEndDate.setMinutes(date.getMinutes())
         newEndDate.setDate(date.getDate())
 
-        if(newEndDate.getHours() - newStartDate.getHours() > 1){
+        if (newEndDate.getHours() - newStartDate.getHours() > 1) {
             newStartDate.setHours(newStartDate.getHours() + 1);
         }
 
         var colorNum;
         var colorsel;
 
-        while(true){        //Do something with these colors ig
+        while (true) {        //Do something with these colors ig
             colorNum = this.state.val;
             //console.log("cN",colorNum)
-            let c = colorNum/100*255;
+            let c = colorNum / 100 * 255;
             //console.log("c",c)
-            if(c < 0){
+            if (c < 0) {
                 colorsel = "#C9C9C9"
                 //colorsel = colorScheme5
                 break;
-            }else{
-                colorsel = "rgb("+(255-c)+",190,0)";
+            } else {
+                colorsel = "rgb(" + (255 - c) + ",190,0)";
                 // window.alert("error try again!!")
                 break;
             }
@@ -69,24 +69,24 @@ class Appp extends React.Component {
         const table = this.state.events
         //const title = "Event " + this.state.id
         const title = "Event " + this.state.countid
-        this.state.id.push(this.state.count)
+        // this.state.id.push(this.state.count)
         table.push({
             //event_id: this.state.id,
-            event_id: this.state.count,
+            event_id: this.state.count + 1,
             title: title,
             start: newStartDate,
             end: newEndDate,
             //color: "#ff0000",
-            color:colorsel,
+            color: colorsel,
 
         })
 
         this.setState({
             events: table,
-            //id: this.state.id + 1,
-            id: this.state.id,
+            // id: this.state.id + 1,
+            // id: this.state.id,
             count: this.state.count + 1,
-            countid:this.state.countid+1,
+            countid: this.state.countid + 1,
         })
     };
 
@@ -102,7 +102,7 @@ class Appp extends React.Component {
             //id: this.state.id + 1,
             id: this.state.id,
             count: this.state.count,
-            countid:this.state.countid,
+            countid: this.state.countid,
         })
     };
 
@@ -112,7 +112,7 @@ class Appp extends React.Component {
         // fetch(url)
         //     .then(res => res.json())
         //     .then(json => this.setState({ events: json }))
-        //     .then(output => console.log("getting all availabilities")) 
+        //     .then(output => console.log("getting all availabilities"))
 
         this.slider = new SliderDHX(this.el, {
             min: 0,
@@ -120,8 +120,8 @@ class Appp extends React.Component {
             step: 1,
             thumbLabel: true,
             value: 50,
-            label: "Set Your Availability:",      
-            
+            label: "Set Your Availability:",
+
             tick: 50,
             majorTick: 10,
             //tickTemplate: v => v,
@@ -138,8 +138,8 @@ class Appp extends React.Component {
     //Slider Component End
 
     render() {
-        const {events} = this.state;
-        console.log({events})
+        const { events } = this.state;
+        console.log({ events })
 
         // if (events.length > 0 && !(events[0] instanceof Date)) {
         //     var id = 0;
@@ -152,18 +152,18 @@ class Appp extends React.Component {
         // }
         return (
             <div className="Appp">
-            {/* Slider Component Start */}
+                {/* Slider Component Start */}
                 <div className="Slider">
-                    
-                    <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}></div>
-                    <div className="avail-label"><div className="less">Less Available</div><div className="more">More Available</div></div>
-                    
-                    
-                    
-                    
 
-                    
-                    
+                    <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center", margin: "auto" }}></div>
+                    <div className="avail-label"><div className="less">Less Available</div><div className="more">More Available</div></div>
+
+
+
+
+
+
+
                     {/* Delete these next five lines */}
                     {/* <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
                         <button className="button button--bordered">{`Event: ${this.state.event}`}</button>
@@ -172,70 +172,74 @@ class Appp extends React.Component {
                         </button>
                     </div> */}
                 </div>
-            {/* Slider Component End */}
-            <div className="Scheduler">
-            <Scheduler
-            height={100}
-            
-            events={this.state.events}
-            view="week"
-            day={null}
-            month={null}
-            onDelete={(id) => this.delEvent(id)}
-            
-            // customEditor={(e) => <Popover
-            //     open={Boolean(this.myBool)}
-            //     anchorReference={this.currentTarget}
-            //     anchorOrigin={{vertical: "center", horizontal:"center"}}>
-            // </Popover>}
-            week={{
-                weekDays: [0, 1, 2, 3, 4, 5],
-                weekStartOn: 6,
-                startHour: 8,
-                endHour: 13,
-                step: 15,
-                cellRenderer: ({ height, start, onClick, ...props }) => {
-                    // Fake some condition up
-                    const hour = start.getHours();
-                    const disabled = hour === 14;
-                    const restProps = disabled ? {} : props;
-                    return (
-                        <>
-                        <Button
-                            style={{
-                                height: "100%",
-                                background: disabled ? "#eee" : "transparent",
-                                cursor: disabled ? "not-allowed" : "pointer"
-                            }}
-                            onClick={(e) => {
-                                const ex = new Date(e.target.getAttribute("end"));
-                                // this.myBool(false);
-                                this.myClick(ex);
-                            }}
-                            disableRipple={disabled}
-                            // disabled={disabled}
-                            {...restProps}></Button>
-                            
-                            </>
-                    );
-                }
-            }}
-            eventRenderer={() => {
-                return (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                            height: "50%",
+                {/* Slider Component End */}
+                <div className="Scheduler">
+                    <Scheduler
+                        height={100}
+                        navigationPickerProps={{
+                            minDate: new Date(2021, 0, 1),
+                            maxDate: new Date(2022, 11, 31),
                         }}
-                    >
-                    </div>
-                );
-            }}
-            />
-            </div>
-            
+
+                        events={this.state.events}
+                        view="week"
+                        day={null}
+                        month={null}
+                        onDelete={(id) => this.delEvent(id)}
+
+                        // customEditor={(e) => <Popover
+                        //     open={Boolean(this.myBool)}
+                        //     anchorReference={this.currentTarget}
+                        //     anchorOrigin={{vertical: "center", horizontal:"center"}}>
+                        // </Popover>}
+                        week={{
+                            weekDays: [0, 1, 2, 3, 4, 5],
+                            weekStartOn: 6,
+                            startHour: 8,
+                            endHour: 13,
+                            step: 15,
+                            cellRenderer: ({ height, start, onClick, ...props }) => {
+                                // Fake some condition up
+                                const hour = start.getHours();
+                                const disabled = hour === 14;
+                                const restProps = disabled ? {} : props;
+                                return (
+                                    <>
+                                        <Button
+                                            style={{
+                                                height: "100%",
+                                                // background: disabled ? "#eee" : "transparent",
+                                                // cursor: disabled ? "not-allowed" : "pointer"
+                                            }}
+                                            onClick={(e) => {
+                                                const ex = new Date(e.target.getAttribute("end"));
+                                                // this.myBool(false);
+                                                this.myClick(ex);
+                                            }}
+                                            // disableRipple={disabled}
+                                            // disabled={disabled}
+                                            {...restProps}></Button>
+
+                                    </>
+                                );
+                            }
+                        }}
+                        eventRenderer={() => {
+                            return (
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "space-between",
+                                        height: "50%",
+                                    }}
+                                >
+                                </div>
+                            );
+                        }}
+                    />
+                </div>
+
             </div>
         );
     }
