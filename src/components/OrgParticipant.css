@@ -1,6 +1,6 @@
 body {
-    background-color: #55575a;
-    color: #8e8a8a;
+    background-color: #ffffff;
+    color: #000000;
     margin: 1;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -8,152 +8,45 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-.orgParticipant { /* Full page container */
-    /* text-align: center; */
-    width: 100%;
-    /* height: 10vh; */
-    /* background-color: darkgray; */
-    float: left;
-    /* border: 1px inset rgb(0, 255, 34); */
-  
-  }
-  .participant-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-    
-  
   .participant-header h1{ /* text: "Event Name:" */
     font-size: 25px;
     color: #5e5bff;
     text-align: center;
-  
-  
   }
-  .participant-header h2{ /* text: "Event Name:" */
+  .participant-header h2{
     font-size: 15px;
     text-align: center;
-    margin: 3;
-    color: #020203;
-  
-  
   }
-  
-   
   .page-body {
     flex: 1;
     text-align: center;
     width: 80%;
     padding: 25px;
     margin: 20px auto;
-    background-color: #f6eeeec6;
+    background-color: #ffffffc6;
     border-radius: 20px;
     border-color: #5e5bff;
     border-style: outset;
     border-width: 3px;
     box-sizing: border-box;
 }
-.Slider {
-    width: 45%;
-    border: 2px solid magenta;
-    height: 80vh;
-    /* background-color: darkgray; */
-    /* right: 200px; */
-    margin-left: 20px;
-  }
-  .App, .Slider {
-    float: left;
-    padding: 10px;
-    box-sizing: border-box;  
-    margin: auto;
+.list{
+  display:left;
+  text-align: left;
+}
+
+.slider{
+  display:left ;
+}
+
+
+
+
+
+
+
+
   
-  }
-
-  .horizontal-slider {
-    width: 100%;
-    max-width: 500px;
-    height: 100vh;
-    margin: auto;
-  }
-  .example-thumb {
-    cursor: pointer;
-    position: absolute;
-    z-index: 100;
-    background: #ffffff;
-    border: 5px solid #3774ff;
-    border-radius: 100%;
-    display: block;
-    box-shadow: 0 0 2px 0 rgb(0 0 0 / 44%);
-  }
-  .example-thumb.active {
-    background-color: grey;
-  }
-  .example-track {
-    position: relative;
-    background: #ddd;
-  }
-  .example-track.example-track-0 {
-    background: #83a9ff;
-  }
-  .horizontal-slider .example-track {
-    top: 20px;
-    height: 4px;
-  }
-  .horizontal-slider .example-thumb {
-    top: 12px;
-    width: 10px;
-    outline: none;
-    height: 10px;
-    line-height: 38px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  .slidecontainer {
-    width: 100%; /* Width of the outside container */
-  }
   
-  /* The slider itself */
-  .slider {
-    -webkit-appearance: none;  /* Override default CSS styles */
-    appearance: none;
-    width: 100%; /* Full-width */
-    height: 25px; /* Specified height */
-    background: #d3d3d3; /* Grey background */
-    outline: none; /* Remove outline */
-    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-    transition: opacity .2s;
-  }
   
-  /* Mouse-over effects */
-  .slider:hover {
-    opacity: 1; /* Fully shown on mouse-over */
-  }
-  
-  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
-    appearance: none;
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: #04AA6D; /* Green background */
-    cursor: pointer; /* Cursor on hover */
-  }
-  
-  .slider::-moz-range-thumb {
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: #04AA6D; /* Green background */
-    cursor: pointer; /* Cursor on hover */
-  }
+ 

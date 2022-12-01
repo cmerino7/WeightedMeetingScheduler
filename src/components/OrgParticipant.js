@@ -10,6 +10,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Slider as SliderDHX } from "dhx-suite";
 import "dhx-suite/codebase/suite.min.css";
+import './OrgParticipant.css'
 
 
 
@@ -96,11 +97,9 @@ class OrgParticipant extends Component{
                 events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0)" //EDIT COLOR HERE
             }
         }
-
         return(
             <div className="orgParticipant">
                 <div className="page-body">
-
                 <header className="participant-header">
                 {}
                 <h1>
@@ -110,30 +109,28 @@ class OrgParticipant extends Component{
                         <li>{el.name}</li>
                         </ul>
                         ))}<p id="event-name"> </p>
-
                 </h1>
+                {}
                 <h2>
                     {}
                     Please use the slider to change participant's relevance-weight <p id="event-name"></p>
-                </h2>
-                {}
-
-                </header>
-
-
-            <ol>
-                {dataList}
-            </ol>
-            <select name="individual" id="participant">
+                    </h2>
+           
+            <select className="select" name="individual" id="participant">
+            testing inside parent value: {this.state.value}
+                
                 {dataDropDown}
         </select>
-        testing inside parent value: {this.state.value}
-        <Slider
+        <Slider className ="slider"
           dataFromParent = {this.state.value}      //data to child
           parentCallback = {this.callbackFunction} //data from child
         />
-
-
+        <ol className="list">
+                {dataList}
+            </ol>
+           
+        </header>
+        
         <Scheduler
             events = {events}
             week={{
@@ -144,8 +141,9 @@ class OrgParticipant extends Component{
                 step: 15}}>
 
         </Scheduler>
-                </div>
-                </div>
+        </div>
+          </div>  
+                
        );
     }
 }
