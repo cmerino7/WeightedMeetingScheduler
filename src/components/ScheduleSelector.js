@@ -66,6 +66,7 @@ class Appp extends React.Component {
 
 
 
+        console.log(colorsel)
         const table = this.state.events
         //const title = "Event " + this.state.id
         const title = "Event " + this.state.countid
@@ -82,6 +83,9 @@ class Appp extends React.Component {
         })
         console.log(table)
 
+        let url = "http://localhost:8080/database/Post/" + this.state.currentName + "/" + newStartDate + "/" + newEndDate + "/" + this.state.val
+        fetch(url)
+
         this.setState({
             events: table,
             // id: this.state.id + 1,
@@ -92,11 +96,17 @@ class Appp extends React.Component {
     };
 
     delEvent(id) {
+        console.log('Deleting Event')
 
         var index = this.state.id.indexOf(id)
 
         this.state.id.splice(index, 1)
-        this.state.events.splice(index, 1)
+        let delevent = this.state.events.splice(index, 1)
+        console.log(delevent)
+        console.log(delevent[0].start)
+        let url = "http://localhost:8080/database/Delete/" + this.state.currentName + "/" + delevent[0].start
+        fetch(url)
+
 
         this.setState({
             events: this.state.events,
@@ -105,15 +115,22 @@ class Appp extends React.Component {
             count: this.state.count,
             countid: this.state.countid,
         })
+
+        /*
+        let url = "http://localhost:8080/database/Delete/" + this.state.currentName + "/" + newStartDate
+        fetch(url)
+            .then(res => res.json())
+            .then(json => console.log(json))
+        */
     };
 
     //Slider Component Start
     componentDidMount() {
-        // let url = "http://localhost:8080/database/CalendarOfP/" + this.state.currentName
-        // fetch(url)
-        //     .then(res => res.json())
-        //     .then(json => this.setState({ events: json }))
-        //     .then(output => console.log("getting all availabilities"))
+         let url = "http://localhost:8080/database/CalendarOfP/" + this.state.currentName
+         fetch(url)
+             .then(res => res.json())
+             .then(json => this.setState({ events: json }))
+             .then(output => console.log("getting all availabilities"))
 
         this.slider = new SliderDHX(this.el, {
             min: 0,
@@ -142,21 +159,23 @@ class Appp extends React.Component {
         const { events } = this.state;
         console.log({ events })
 
-        // if (events.length > 0 && !(events[0] instanceof Date)) {
-        //     var id = 0;
-        //     for (let i = 0; i < events.length; i++) {
-        //         events[i].event_id = ++id;
-        //         events[i].start = new Date(events[i].start)
-        //         events[i].end = new Date(events[i].end)
-        //         events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0)" //EDIT COLOR HERE
-        //     }
-        // }
+
+         // if (events.length > 0 && !(events[0] instanceof Date)) {
+         //     var id = 0;
+         //     for (let i = 0; i < events.length; i++) {
+         //        events[i].event_id = ++id;
+         //        events[i].start = new Date(events[i].start)
+         //        events[i].end = new Date(events[i].end)
+         //        events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0)" //EDIT COLOR HERE
+         //     }
+         // }
+
         return (
             <div className="Appp">
                 {/* Slider Component Start */}
                 <div className="Slider">
 
-                    <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center", margin: "auto" }}></div>
+                    <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}></div>
                     <div className="avail-label"><div className="less">Less Available</div><div className="more">More Available</div></div>
 
 
@@ -240,7 +259,6 @@ class Appp extends React.Component {
                         }}
                     />
                 </div>
-
             </div>
         );
     }

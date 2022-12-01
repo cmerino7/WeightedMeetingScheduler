@@ -67,14 +67,22 @@ class OrgParticipant extends Component{
         console.log("avail",{availability})
 
 
-	    let dataList = list.length > 0 && list.map((item, i) => {
+	    let dataDropdown = list.length > 0 && list.map((item, i) => {
 		    return (
-                <option key={i} value={item.id}> {item.name} </option>
+                <option key={i} value={item.id}> {item.name}</option>
                 //add something here to update val state from db (individual weights)
 
                 )
 
 	    }, this);
+
+        let dataList = list.length > 0 && list.map((item, i) => { return (
+            <li key={i} value={item.id}> {item.name} {item.weight} </li>
+            //add something here to update val state from db (individual weights)
+
+            )
+
+    }, this);
 
         //this.setState({events: {start: parseISO(this.state.events.start), end: parseISO(this.state.events.end)}})
 
@@ -116,13 +124,15 @@ class OrgParticipant extends Component{
 
 
             <select name="individual" id="participant">
-                {dataList}
+                {dataDropdown}
         </select>
         <Slider
           dataFromParent = {this.state.value}      //data to child
           parentCallback = {this.callbackFunction} //data from child
         />
-
+        <ol className="list">
+                {dataList}
+        </ol>
 
         <Scheduler 
             height={300}
