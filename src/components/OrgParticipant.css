@@ -7,31 +7,43 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
 }
+.page-body {
+  flex: 0.5;
+  width: 80%;
+  padding: 2px;
+  margin: 20px auto;
+  background-color: #ffffffc6;
+  border-radius: 20px;
+  border-color: #5e5bff;
+  border-style: outset;
+  border-width: 3px ;
+  box-sizing: border-box;
+}
 
   .participant-header h1{ /* text: "Event Name:" */
     font-size: 25px;
     color: #5e5bff;
-    text-align: center;
+    text-align:center;
+
   }
   .participant-header h2{
-    font-size: 15px;
-    text-align: center;
+    font-size: 20px;
   }
-  .page-body {
-    flex: 1;
-    text-align: center;
-    width: 80%;
-    padding: 25px;
-    margin: 20px auto;
-    background-color: #ffffffc6;
-    border-radius: 20px;
-    border-color: #5e5bff;
-    border-style: outset;
-    border-width: 3px;
-    box-sizing: border-box;
-}
+  .content{
+    font-size: 15px;
+    text-align: left;
+    margin: 20px;
+    text-decoration-style: solid;
+  
+  }
+ 
+ .list h2{
+  display: right;
+
+  
+ }
 .list{
-  display:left;
+  display:inline-block;
   text-align: left;
 }
 

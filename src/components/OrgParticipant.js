@@ -113,13 +113,13 @@ class OrgParticipant extends Component{
                 {}
                 <h2>
                     {}
-                    Please use the slider to change participant's relevance-weight <p id="event-name"></p>
+                    Please use the slider to change participant's relevance-weight
+                     <p id="event-name"></p>
+                     
                     </h2>
-           
             <select className="select" name="individual" id="participant">
-            testing inside parent value: {this.state.value}
-                
                 {dataDropDown}
+                testing inside parent value: {this.state.value}
         </select>
         <Slider className ="slider"
           dataFromParent = {this.state.value}      //data to child
@@ -130,7 +130,7 @@ class OrgParticipant extends Component{
             </ol>
            
         </header>
-        
+        <div className="schedule">
         <Scheduler
             events = {events}
             week={{
@@ -141,6 +141,7 @@ class OrgParticipant extends Component{
                 step: 15}}>
 
         </Scheduler>
+        </div>
         </div>
           </div>  
                 
