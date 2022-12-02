@@ -10,8 +10,8 @@ public class Participant {
     private static int counts = 1;
     private int id;
     private String name;
-
     private float weight;
+
 
     public Participant(){
         id = counts;
@@ -54,7 +54,9 @@ public class Participant {
     public float getWeight(){
         return weight;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
 }
