@@ -109,7 +109,7 @@ public class EmbeddedService {
         log.info("\nthe new event starts from " + startdate + " and ends on " + enddate + " for Event #" + e_id + "with name: "  + e_name + "\n");
         localtemplate.update(addEvent, e_id, Timestamp.valueOf(startdate), Timestamp.valueOf(enddate), e_name);
     }
-     
+
 
     @GetMapping("/CalendarName/{e_id}")
     public List<Event_ID_Name>getE_Name(@PathVariable("e_id")int e_id){
