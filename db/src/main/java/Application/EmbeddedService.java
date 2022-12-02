@@ -7,10 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -40,17 +39,18 @@ public class EmbeddedService {
                                         + " WHERE event_id = ?"
                                         + " GROUP BY TIMESLOT";
 
-    static final String getAllCalendarWAva = "SELECT timeslot, sum(availability)/count(participant_id) AS totalavailability"
-                                        + " FROM CALENDAR"
-                                        + " WHERE event_id = ?"
-                                        + " GROUP BY TIMESLOT";
+    static final String getAllCalendarWAva = "SELECT timeslot, sum(availability)*sum(weight)/count(participant_id) AS totalavailability"
+                                            + " FROM CALENDAR AS c, PARTICIPANTS AS p"
+                                            + " WHERE c.EVENT_ID  = ?"
+                                            + " AND c.PARTICIPANT_ID = p.ID"
+                                            + " GROUP BY c.TIMESLOT";
 
     //participant name given participant id
     static final String getParticipantName = "select p_name from participants where id = ?";
     //participant id given participant name
     static final String getPArticipantId = "select id from participants where p_name = ?";
     //get all participant names
-    static final String getParticipantList = "select id, p_name from participants";
+    static final String getParticipantList = "select id, p_name, weight from participants";
     //organizer name given organizer id
     static final String getOrganizerName = "select name from organizer where id = ?";
 
@@ -75,11 +75,22 @@ public class EmbeddedService {
     //delete rows based on event id
     static final String deleteEvent = "delete from organizer where event_id = ?;" + " delete from calendar where event_id = ?";
 
+    //delete row based on p_name, e_id, and time
+    static final String deleteRow = "DELETE FROM CALENDAR"
+                                + " WHERE participant_id = ?"
+                                + " AND timeslot = ?"
+                                + " AND EVENT_ID  = ?";
+
 
     public void addPName(String name){
         log.info("\nadding participant\n");
         Participant tempp = new Participant(name);
         localtemplate.update(addParticipantName, tempp.getId(), tempp.getName());
+    }
+
+    public void deleteRowforParticipant(int p_id, Timestamp time, int e_id){
+        log.info("\nDeleting Event for participant " + p_id + " on time " + time + " of event " + e_id + "\n");
+        localtemplate.update(deleteRow, p_id, time, e_id);
     }
 
     public void addTime(int p_id, Timestamp time, int e_id, Float availability){
@@ -98,27 +109,6 @@ public class EmbeddedService {
         log.info("\nthe new event starts from " + startdate + " and ends on " + enddate + " for Event #" + e_id + "with name: "  + e_name + "\n");
         localtemplate.update(addEvent, e_id, Timestamp.valueOf(startdate), Timestamp.valueOf(enddate), e_name);
     }
-
-    /* 
-    @GetMapping("/CalendarOfP/{p_name}")
-    public AppEvent getCOfP(@PathVariable("p_name") String p_name){
-        log.info("\ngetting calendar of participant " + p_name+ "\n");
-        List<Map<Timestamp, Float>> templ = localtemplate.query(getCalendarOfParticipant, new RowMapper<Map<Timestamp, Float>>(){
-            @Override
-            public Map<Timestamp, Float> mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Map<Timestamp, Float> tempm = new HashMap<>();
-                tempm.put(rs.getTimestamp(1), rs.getFloat(2));
-                return tempm;
-            }
-        }, p_name);
-        int p_id = localtemplate.queryForObject(getPArticipantId, new Object[]{p_name}, Integer.class);
-        AppEvent tempe = new AppEvent(1, p_id);
-        for(int i = 0; i < templ.size(); i++){
-            tempe.addlineMap(templ.get(i));
-        }
-        return tempe;
-    }
-    */
      
 
     @GetMapping("/CalendarName/{e_id}")
@@ -143,7 +133,7 @@ public class EmbeddedService {
         List<Participant> list = localtemplate.query(getParticipantList, new RowMapper() {
             @Override
             public Participant mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Participant tempp = new Participant(rs.getInt(1), rs.getString(2));
+                Participant tempp = new Participant(rs.getInt(1), rs.getString(2), rs.getFloat(3));
                 return tempp;
             }
         });
@@ -217,7 +207,7 @@ public class EmbeddedService {
 
     @GetMapping("/CalendarOfP/{p_name}")
     public List<Events> getCOfP(@PathVariable("p_name") String p_name){
-        log.info("getting events of participant" + p_name);
+        log.info("getting events of participant " + p_name);
         int p_id = localtemplate.queryForObject(getPArticipantId, new Object[]{p_name}, Integer.class);
         List<Events> output = localtemplate.query(getCalendarOfParticipant, new RowMapper<Events>() {
             @Override
@@ -227,4 +217,39 @@ public class EmbeddedService {
         }, p_name);
         return output;
     }
+
+    @GetMapping("/Post/{p_name}/{start}/{end}/{color}")
+    public void insertTime(@PathVariable("p_name") String p_name, @PathVariable("start") String start, @PathVariable("end") String end, @PathVariable("color") int color) throws ParseException {
+        log.info("posting items to backend");
+        log.info(p_name);
+        log.info(start);
+        log.info(end);
+        log.info(String.valueOf(color));
+
+        int p_id = localtemplate.queryForObject(getPArticipantId, new Object[]{p_name}, Integer.class);
+        SimpleDateFormat format1 = new SimpleDateFormat("E MMM dd yyyy HH:mm:ss");
+        java.util.Date date1 = format1.parse(start);
+        log.info(String.valueOf(date1));
+        log.info(String.valueOf(p_id));
+        Timestamp tempstart = new Timestamp(date1.getTime());
+        log.info(String.valueOf(tempstart));
+        float ava = (float) (color * 0.01);
+        log.info(String.valueOf(ava));
+        this.addTime(p_id, tempstart, 1, ava);
+    }
+
+    @GetMapping("/Delete/{p_name}/{start}")
+    public void DeleteTime(@PathVariable("p_name") String p_name, @PathVariable("start") String start) throws ParseException {
+        log.info("Deleting Time for participant" + p_name + " of time " + start);
+        log.info(p_name);
+        log.info(start);
+        int p_id = localtemplate.queryForObject(getPArticipantId, new Object[]{p_name}, Integer.class);
+        SimpleDateFormat format1 = new SimpleDateFormat("E MMM dd yyyy HH:mm:ss");
+        java.util.Date date1 = format1.parse(start);
+        log.info(String.valueOf(date1));
+        Timestamp tempstart = new Timestamp(date1.getTime());
+        this.deleteRowforParticipant(p_id, tempstart, 1);
+    }
 }
+
+

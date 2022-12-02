@@ -28,8 +28,8 @@ class Appp extends React.Component {
     }
 
     myClick(date) {
-        const newStartDate = new Date()
-        if(date.getMinutes() === 0){
+        const newStartDate = new Date(date)
+        if (date.getMinutes() === 0) {
             newStartDate.setHours(date.getHours() - 1)
         } else {
             newStartDate.setHours(date.getHours())
@@ -37,19 +37,19 @@ class Appp extends React.Component {
         newStartDate.setMinutes(date.getMinutes() - 15)
         newStartDate.setDate(date.getDate())
 
-        const newEndDate = new Date()
+        const newEndDate = new Date(date)
         newEndDate.setHours(date.getHours())
         newEndDate.setMinutes(date.getMinutes())
         newEndDate.setDate(date.getDate())
 
-        if(newEndDate.getHours() - newStartDate.getHours() > 1){
+        if (newEndDate.getHours() - newStartDate.getHours() > 1) {
             newStartDate.setHours(newStartDate.getHours() + 1);
         }
 
         var colorNum;
         var colorsel;
 
-        while(true){        //Do something with these colors ig
+        while (true) {        //Do something with these colors ig
             colorNum = this.state.val;
             let r =(colorNum-50)*255/100*2
             console.log("r,g",r)
@@ -71,53 +71,71 @@ class Appp extends React.Component {
 
 
 
+        console.log(colorsel)
         const table = this.state.events
         //const title = "Event " + this.state.id
         const title = "Event " + this.state.countid
-        this.state.id.push(this.state.count)
+        // this.state.id.push(this.state.count)
         table.push({
             //event_id: this.state.id,
-            event_id: this.state.count,
+            event_id: this.state.count + 1,
             title: title,
             start: newStartDate,
             end: newEndDate,
             //color: "#ff0000",
-            color:colorsel,
+            color: colorsel,
 
         })
+        console.log(table)
+
+        let url = "http://localhost:8080/database/Post/" + this.state.currentName + "/" + newStartDate + "/" + newEndDate + "/" + this.state.val
+        fetch(url)
 
         this.setState({
             events: table,
-            //id: this.state.id + 1,
-            id: this.state.id,
+            // id: this.state.id + 1,
+            // id: this.state.id,
             count: this.state.count + 1,
-            countid:this.state.countid+1,
+            countid: this.state.countid + 1,
         })
     };
 
     delEvent(id) {
+        console.log('Deleting Event')
 
         var index = this.state.id.indexOf(id)
 
         this.state.id.splice(index, 1)
-        this.state.events.splice(index, 1)
+        let delevent = this.state.events.splice(index, 1)
+        console.log(delevent)
+        console.log(delevent[0].start)
+        let url = "http://localhost:8080/database/Delete/" + this.state.currentName + "/" + delevent[0].start
+        fetch(url)
+
 
         this.setState({
             events: this.state.events,
             //id: this.state.id + 1,
             id: this.state.id,
             count: this.state.count,
-            countid:this.state.countid,
+            countid: this.state.countid,
         })
+
+        /*
+        let url = "http://localhost:8080/database/Delete/" + this.state.currentName + "/" + newStartDate
+        fetch(url)
+            .then(res => res.json())
+            .then(json => console.log(json))
+        */
     };
 
     //Slider Component Start
     componentDidMount() {
-        // let url = "http://localhost:8080/database/CalendarOfP/" + this.state.currentName
-        // fetch(url)
-        //     .then(res => res.json())
-        //     .then(json => this.setState({ events: json }))
-        //     .then(output => console.log("getting all availabilities")) 
+         let url = "http://localhost:8080/database/CalendarOfP/" + this.state.currentName
+         fetch(url)
+             .then(res => res.json())
+             .then(json => this.setState({ events: json }))
+             .then(output => console.log("getting all availabilities"))
 
         this.slider = new SliderDHX(this.el, {
             css: 'custom_class',
@@ -143,21 +161,23 @@ class Appp extends React.Component {
     //Slider Component End
 
     render() {
-        const {events} = this.state;
-        // console.log({events})
+        const { events } = this.state;
+        console.log({ events })
 
-        // if (events.length > 0 && !(events[0] instanceof Date)) {
-        //     var id = 0;
-        //     for (let i = 0; i < events.length; i++) {
-        //         events[i].event_id = ++id;
-        //         events[i].start = new Date(events[i].start)
-        //         events[i].end = new Date(events[i].end)
-        //         events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0)" //EDIT COLOR HERE
-        //     }
-        // }
+
+         // if (events.length > 0 && !(events[0] instanceof Date)) {
+         //     var id = 0;
+         //     for (let i = 0; i < events.length; i++) {
+         //        events[i].event_id = ++id;
+         //        events[i].start = new Date(events[i].start)
+         //        events[i].end = new Date(events[i].end)
+         //        events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0)" //EDIT COLOR HERE
+         //     }
+         // }
+
         return (
             <div className="Appp">
-            {/* Slider Component Start */}
+                {/* Slider Component Start */}
                 <div className="Slider">
                     <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}></div>
                     <div className="scale"><img src={scale} ></img></div>
@@ -167,8 +187,12 @@ class Appp extends React.Component {
                     
                     
 
-                    
-                    
+
+
+
+
+
+
                     {/* Delete these next five lines */}
                     {/* <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
                         <button className="button button--bordered">{`Event: ${this.state.event}`}</button>
@@ -177,70 +201,73 @@ class Appp extends React.Component {
                         </button>
                     </div> */}
                 </div>
-            {/* Slider Component End */}
-            <div className="Scheduler">
-            <Scheduler
-            height={100}
-            
-            events={this.state.events}
-            view="week"
-            day={null}
-            month={null}
-            onDelete={(id) => this.delEvent(id)}
-            
-            // customEditor={(e) => <Popover
-            //     open={Boolean(this.myBool)}
-            //     anchorReference={this.currentTarget}
-            //     anchorOrigin={{vertical: "center", horizontal:"center"}}>
-            // </Popover>}
-            week={{
-                weekDays: [0, 1, 2, 3, 4, 5],
-                weekStartOn: 6,
-                startHour: 8,
-                endHour: 13,
-                step: 15,
-                cellRenderer: ({ height, start, onClick, ...props }) => {
-                    // Fake some condition up
-                    const hour = start.getHours();
-                    const disabled = hour === 14;
-                    const restProps = disabled ? {} : props;
-                    return (
-                        <>
-                        <Button
-                            style={{
-                                height: "100%",
-                                background: disabled ? "#eee" : "transparent",
-                                cursor: disabled ? "not-allowed" : "pointer"
-                            }}
-                            onClick={(e) => {
-                                const ex = new Date(e.target.getAttribute("end"));
-                                // this.myBool(false);
-                                this.myClick(ex);
-                            }}
-                            disableRipple={disabled}
-                            // disabled={disabled}
-                            {...restProps}></Button>
-                            
-                            </>
-                    );
-                }
-            }}
-            eventRenderer={() => {
-                return (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                            height: "50%",
+                {/* Slider Component End */}
+                <div className="Scheduler">
+                    <Scheduler
+                        height={100}
+                        navigationPickerProps={{
+                            minDate: new Date(2021, 0, 1),
+                            maxDate: new Date(2022, 11, 31),
                         }}
-                    >
-                    </div>
-                );
-            }}
-            />
-            </div>
-            
+
+                        events={this.state.events}
+                        view="week"
+                        day={null}
+                        month={null}
+                        onDelete={(id) => this.delEvent(id)}
+
+                        // customEditor={(e) => <Popover
+                        //     open={Boolean(this.myBool)}
+                        //     anchorReference={this.currentTarget}
+                        //     anchorOrigin={{vertical: "center", horizontal:"center"}}>
+                        // </Popover>}
+                        week={{
+                            weekDays: [0, 1, 2, 3, 4, 5],
+                            weekStartOn: 6,
+                            startHour: 8,
+                            endHour: 13,
+                            step: 15,
+                            cellRenderer: ({ height, start, onClick, ...props }) => {
+                                // Fake some condition up
+                                const hour = start.getHours();
+                                const disabled = hour === 14;
+                                const restProps = disabled ? {} : props;
+                                return (
+                                    <>
+                                        <Button
+                                            style={{
+                                                height: "100%",
+                                                // background: disabled ? "#eee" : "transparent",
+                                                // cursor: disabled ? "not-allowed" : "pointer"
+                                            }}
+                                            onClick={(e) => {
+                                                const ex = new Date(e.target.getAttribute("end"));
+                                                // this.myBool(false);
+                                                this.myClick(ex);
+                                            }}
+                                            // disableRipple={disabled}
+                                            // disabled={disabled}
+                                            {...restProps}></Button>
+
+                                    </>
+                                );
+                            }
+                        }}
+                        eventRenderer={() => {
+                            return (
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "space-between",
+                                        height: "50%",
+                                    }}
+                                >
+                                </div>
+                            );
+                        }}
+                    />
+                </div>
             </div>
         );
     }
