@@ -6,6 +6,7 @@ import Slider from './Slider'
 import Appp from './ScheduleSelector';
 import ReactSlider from "react-slider";
 import SliderEvents from './Slider';
+import './ScheduleSide.css'
 
 
 class Homepage extends React.Component{
@@ -41,7 +42,8 @@ class Homepage extends React.Component{
                 { 
                     (this.state.isLoggedIn)?(
                     <div>
-                    <Logout onClickFunc = {this.logoutClicked} />
+                        <div className="logout-div"><Logout onClickFunc = {this.logoutClicked} /></div>
+
                         <div className='Slider'>
                             <div className="ScheduleSelector">
                                 <Appp

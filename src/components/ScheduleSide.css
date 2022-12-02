@@ -1,0 +1,58 @@
+.logButton {
+    align-items: center;
+    appearance: button;
+    background-color: #0276FF;
+    border-radius: 8px;
+    border-style: none;
+    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: "RM Neue",sans-serif;
+    font-size: 16px;
+    line-height: 1.15;
+    /* height: 40px; */
+    margin-left: 5px;
+    padding: 5px 5px;
+    text-align: center;
+    text-transform: none;
+    transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-weight: bold;
+}
+
+.logButton:active {
+    background-color: #006AE8;
+}
+
+.logButton:hover {
+    background-color: #1C84FF;
+
+}
+
+.nameField {
+    min-width:30%;
+    max-width: 40%;
+    height: 40px;
+    font-size: 30px;
+    text-align:left;
+    color: #000;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.logout-div {
+    float: right;
+    margin-right: 20px;
+}
+
+h1 {
+    padding-left: 20px;
+}
+
+h2{
+    padding-left: 40px;
+}

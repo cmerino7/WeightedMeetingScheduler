@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Wed Nov 30 12:57:38 PST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-ca54-aea1-000003683b60 
+Wed Nov 30 23:15:54 PST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-cc8a-bad6-0000034889d0 
 on database directory /home/alvin/Desktop/CSE120/relevance_weighted_meeting_scheduler/db/mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5cb0d902 
 Loaded from file:/home/alvin/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
 java.vendor=Private Build

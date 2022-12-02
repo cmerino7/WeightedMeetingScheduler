@@ -10,13 +10,14 @@ import "./ScheduleSelector.css"
 import { Button } from "@mui/material";
 import { Popover } from "@mui/material";
 import { Tooltip } from "@mui/material";
+import scale from './scale.png'
 
 class Appp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             event: "",
-            val: "50",
+            val: "100",
             events: [],
             //id: 10,
             id: [],
@@ -50,15 +51,19 @@ class Appp extends React.Component {
 
         while(true){        //Do something with these colors ig
             colorNum = this.state.val;
-            //console.log("cN",colorNum)
-            let c = colorNum/100*255;
-            //console.log("c",c)
-            if(c < 0){
-                colorsel = "#C9C9C9"
-                //colorsel = colorScheme5
+            let r =(colorNum-50)*255/100*2
+            console.log("r,g",r)
+            if(colorNum < 50){
+                colorsel = "rgb(255,"+(255+r)+","+(255+r)+")";
+                console.log("colorselect",colorsel);
+                break;
+            }
+            else if(colorNum >= 50){
+                colorsel = "rgb("+(255+(-r))+",255,"+(255+(-r))+")";
+                console.log("colorselect",colorsel);
                 break;
             }else{
-                colorsel = "rgb("+(255-c)+",190,0)";
+                colorsel = "000000";
                 // window.alert("error try again!!")
                 break;
             }
@@ -115,22 +120,22 @@ class Appp extends React.Component {
         //     .then(output => console.log("getting all availabilities")) 
 
         this.slider = new SliderDHX(this.el, {
+            css: 'custom_class',
             min: 0,
             max: 100,
             step: 1,
             thumbLabel: true,
-            value: 50,
+            value: 100,
             label: "Set Your Availability:",      
             
-            tick: 50,
-            majorTick: 10,
+            // tick: 50,
+            // majorTick: 10,
             //tickTemplate: v => v,
         });
 
         this.slider.events.on("change", val => this.setState({ event: "change", val: val }));
         this.slider.events.on("mousedown", val => this.setState({ event: "mousedown" }));
         this.slider.events.on("mouseup", val => this.setState({ event: "mouseup" }));
-        console.log("MOUNTED")
     }
     componentWillUnmount() {
         this.slider && this.slider.destructor();
@@ -139,7 +144,7 @@ class Appp extends React.Component {
 
     render() {
         const {events} = this.state;
-        console.log({events})
+        // console.log({events})
 
         // if (events.length > 0 && !(events[0] instanceof Date)) {
         //     var id = 0;
@@ -154,9 +159,9 @@ class Appp extends React.Component {
             <div className="Appp">
             {/* Slider Component Start */}
                 <div className="Slider">
-                    
                     <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}></div>
-                    <div className="avail-label"><div className="less">Less Available</div><div className="more">More Available</div></div>
+                    <div className="scale"><img src={scale} ></img></div>
+                    <p className="avail-label">Less&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;More</p>
                     
                     
                     

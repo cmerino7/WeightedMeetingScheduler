@@ -1,6 +1,7 @@
 import React from 'react';
 import ScheduleSide from './ScheduleSide'
 import Message from './Message';
+import './ScheduleSide.css'
 
 const data = ''
 
@@ -34,11 +35,8 @@ class Login extends React.Component {
       return (
         
         <form onSubmit={this.sendData} > 
-            <label>
-                Name:
-                <input type="text" value={this.state.value} onChange={this.handleChange}/>    
-            </label>
-          <input type="submit" value="Submit" />
+          <input className="nameField" type="text" value={this.state.value} onChange={this.handleChange}/>    
+          <input className='logButton' type="submit" value="Submit" />
         </form>
       );
     }
