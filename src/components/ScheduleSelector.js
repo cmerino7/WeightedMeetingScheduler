@@ -29,7 +29,7 @@ class Appp extends React.Component {
 
     myClick(date) {
         const newStartDate = new Date(date)
-        if (date.getMinutes() === 0) {
+        if(date.getMinutes() === 0){
             newStartDate.setHours(date.getHours() - 1)
         } else {
             newStartDate.setHours(date.getHours())
@@ -42,14 +42,14 @@ class Appp extends React.Component {
         newEndDate.setMinutes(date.getMinutes())
         newEndDate.setDate(date.getDate())
 
-        if (newEndDate.getHours() - newStartDate.getHours() > 1) {
+        if(newEndDate.getHours() - newStartDate.getHours() > 1){
             newStartDate.setHours(newStartDate.getHours() + 1);
         }
 
         var colorNum;
         var colorsel;
 
-        while (true) {        //Do something with these colors ig
+        while(true){        //Do something with these colors ig
             colorNum = this.state.val;
             let r =(colorNum-50)*255/100*2
             console.log("r,g",r)
@@ -75,15 +75,15 @@ class Appp extends React.Component {
         const table = this.state.events
         //const title = "Event " + this.state.id
         const title = "Event " + this.state.countid
-        // this.state.id.push(this.state.count)
+        this.state.id.push(this.state.count)
         table.push({
             //event_id: this.state.id,
-            event_id: this.state.count + 1,
+            event_id: this.state.count,
             title: title,
             start: newStartDate,
             end: newEndDate,
             //color: "#ff0000",
-            color: colorsel,
+            color:colorsel,
 
         })
         console.log(table)
@@ -93,10 +93,10 @@ class Appp extends React.Component {
 
         this.setState({
             events: table,
-            // id: this.state.id + 1,
-            // id: this.state.id,
+            //id: this.state.id + 1,
+            id: this.state.id,
             count: this.state.count + 1,
-            countid: this.state.countid + 1,
+            countid:this.state.countid+1,
         })
     };
 
@@ -118,7 +118,7 @@ class Appp extends React.Component {
             //id: this.state.id + 1,
             id: this.state.id,
             count: this.state.count,
-            countid: this.state.countid,
+            countid:this.state.countid,
         })
 
         /*
@@ -161,8 +161,8 @@ class Appp extends React.Component {
     //Slider Component End
 
     render() {
-        const { events } = this.state;
-        console.log({ events })
+        const {events} = this.state;
+        console.log({events})
 
 
          // if (events.length > 0 && !(events[0] instanceof Date)) {
@@ -205,16 +205,14 @@ class Appp extends React.Component {
                 <div className="Scheduler">
                     <Scheduler
                         height={100}
-                        navigationPickerProps={{
-                            minDate: new Date(2021, 0, 1),
-                            maxDate: new Date(2022, 11, 31),
-                        }}
+            //height = "50pc"
 
                         events={this.state.events}
                         view="week"
                         day={null}
                         month={null}
                         onDelete={(id) => this.delEvent(id)}
+                        draggable = {0}
 
                         // customEditor={(e) => <Popover
                         //     open={Boolean(this.myBool)}
@@ -237,15 +235,15 @@ class Appp extends React.Component {
                                         <Button
                                             style={{
                                                 height: "100%",
-                                                // background: disabled ? "#eee" : "transparent",
-                                                // cursor: disabled ? "not-allowed" : "pointer"
+                                background: disabled ? "#eee" : "transparent",
+                                cursor: disabled ? "not-allowed" : "pointer"
                                             }}
                                             onClick={(e) => {
                                                 const ex = new Date(e.target.getAttribute("end"));
                                                 // this.myBool(false);
                                                 this.myClick(ex);
                                             }}
-                                            // disableRipple={disabled}
+                                                disableRipple={disabled}
                                             // disabled={disabled}
                                             {...restProps}></Button>
 

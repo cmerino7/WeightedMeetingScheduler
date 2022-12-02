@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Wed Nov 30 23:15:54 PST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-cc8a-bad6-0000034889d0 
-on database directory /home/alvin/Desktop/CSE120/relevance_weighted_meeting_scheduler/db/mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5cb0d902 
-Loaded from file:/home/alvin/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
-java.vendor=Private Build
-java.runtime.version=17.0.5+8-Ubuntu-2ubuntu122.04
-user.dir=/home/alvin/Desktop/CSE120/relevance_weighted_meeting_scheduler/db
-os.name=Linux
+Wed Nov 30 16:40:02 PST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-cb20-4d0f-0000012e3370 
+on database directory C:\Users\16617\OneDrive\Desktop\cse120\relevance_weighted_meeting_scheduler\db\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/16617/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=17.0.5+9-LTS-191
+user.dir=C:\Users\16617\OneDrive\Desktop\cse120\relevance_weighted_meeting_scheduler\db
+os.name=Windows 11
 os.arch=amd64
-os.version=5.15.0-53-generic
+os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
