@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import { Slider as SliderDHX } from "dhx-suite";
 import "dhx-suite/codebase/suite.min.css";
 import './OrgParticipant.css'
+import e from "cors";
 
 
 
@@ -25,12 +26,19 @@ class OrgParticipant extends Component{
             availability: [],
             events: [],
             value: 69, //THIS SHOULD BE SET FROM BACKEND(CURRENT PARTICIPANT WEIGHT)
+            currentParticipant: "NOBODY SELECTED"
         }
     }
 
     callbackFunction = (childData) => { //when slider is moved, will update this state
         this.setState({ value: childData });
      };
+
+    getLink = (e) => {
+        const changeValue = e.target.value
+        this.setState({currentParticipant:this.state.list[changeValue-1].name})
+        console.log(this.state.list[changeValue-1].name )
+       };
 
     componentDidMount() {
         fetch("http://localhost:8080/database/ParticipantList")
@@ -69,20 +77,15 @@ class OrgParticipant extends Component{
 
 
 	    let dataDropDown = list.length > 0 && list.map((item, i) => { return (
-                <option key={i} value={item.id}> {item.name} {item.weight} </option>
-                //add something here to update val state from db (individual weights)
-
-                )
-
-	    }, this);
+            
+            <option key={i} value={item.id}> {item.name} {item.weight} </option>
+            )
+        }, this);
 	    let dataList = list.length > 0 && list.map((item, i) => { return (
-                <li key={i} value={item.id}> {item.name} {item.weight} </li>
-                //add something here to update val state from db (individual weights)
-
-                )
-
+            <li key={i} value={item.id}> {item.name} {item.weight} </li>
+            )
 	    }, this);
-
+        
 
         //this.setState({events: {start: parseISO(this.state.events.start), end: parseISO(this.state.events.end)}})
 
@@ -95,11 +98,12 @@ class OrgParticipant extends Component{
                 events[i].event_id = ++id;
                 events[i].start = new Date(events[i].start)
                 events[i].end = new Date(events[i].end)
-                events[i].color = "rgb("+(255-(events[i].availability*255)-(this.state.value*255/100))+",190,0)" //EDIT COLOR HERE
+                events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0,"+(this.state.value/100)+")" //EDIT COLOR HERE
             }
         }
         return(
             <div className="orgParticipant">
+                
                 <div className="page-body">
                 <header className="participant-header">
                 <div className="style">
@@ -114,17 +118,17 @@ class OrgParticipant extends Component{
                 </h1>
                 <div className="style"></div>
                 {}
-                <h2>
+                <p>
                     {}
                     Please use the slider to change participant's relevance-weight
-                     <p id="event-name"></p>
+                    <br></br>test-currentName: {this.state.currentParticipant} <p id="event-name"></p>
 
-                    </h2>
+                    </p>
 
-            <select className="select" name="individual" id="participant">
+            <select className="select" name="individual" id="participant" onChange={(e) => this.getLink(e)}>
+            <option value="" selected="true" disabled="disabled">Select Participant...</option>
                 {dataDropDown}
-
-        </select>
+            </select>
         <Slider className ="slider"
           dataFromParent = {this.state.value}      //data to child
           parentCallback = {this.callbackFunction} //data from child
