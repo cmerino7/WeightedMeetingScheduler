@@ -10,7 +10,8 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Slider as SliderDHX } from "dhx-suite";
 import "dhx-suite/codebase/suite.min.css";
-import './ScheduleSelector.css';
+import './OrgParticipant.css'
+
 
 
 
@@ -97,12 +98,11 @@ class OrgParticipant extends Component{
                 events[i].color = "rgb("+(255-(events[i].availability*255)-(this.state.value*255/100))+",190,0)" //EDIT COLOR HERE
             }
         }
-
         return(
             <div className="orgParticipant">
                 <div className="page-body">
-
                 <header className="participant-header">
+                <div className="style">
                 {}
                 <h1>
                     {}
@@ -111,31 +111,31 @@ class OrgParticipant extends Component{
                         <li>{el.name}</li>
                         </ul>
                         ))}<p id="event-name"> </p>
-
                 </h1>
-                <p>
-                    {}
-                    Please use the slider to change participant's relevance-weight <p id="event-name"></p>
-                </p>
+                <div className="style"></div>
                 {}
+                <h2>
+                    {}
+                    Please use the slider to change participant's relevance-weight
+                     <p id="event-name"></p>
 
-                </header>
+                    </h2>
 
-
-            <ol>
-                {dataList}
-            </ol>
-            <select name="individual" id="participant">
+            <select className="select" name="individual" id="participant">
                 {dataDropDown}
+
         </select>
-        <Slider
+        <Slider className ="slider"
           dataFromParent = {this.state.value}      //data to child
           parentCallback = {this.callbackFunction} //data from child
         />
         <ol className="list">
                 {dataList}
-        </ol>
+            </ol>
+            </div>
+        </header>
 
+        <div className="schedule">
         <Scheduler
             events = {events}
             week={{
@@ -143,23 +143,13 @@ class OrgParticipant extends Component{
                 weekStartOn: 6,
                 startHour: 8,
                 endHour: 13,
-                step: 15}}
-            eventRenderer={() => {
-                return (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                            height: "50%"}}>
-                    </div>
-                );
-            }}
-                >
+                step: 15}}>
 
         </Scheduler>
-                </div>
-                </div>
+        </div>
+        </div>
+          </div>
+
        );
     }
 }
