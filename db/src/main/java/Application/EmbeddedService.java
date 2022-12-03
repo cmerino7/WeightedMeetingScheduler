@@ -39,11 +39,17 @@ public class EmbeddedService {
                                         + " WHERE event_id = ?"
                                         + " GROUP BY TIMESLOT";
 
-    static final String getAllCalendarWAva = "SELECT timeslot, sum(availability)*sum(weight)/count(participant_id) AS totalavailability"
+    static final String getAllCalendarWAva = "SELECT timeslot, sum(weight)/count(participant_id) AS totalavailability"
                                             + " FROM CALENDAR AS c, PARTICIPANTS AS p"
                                             + " WHERE c.EVENT_ID  = ?"
                                             + " AND c.PARTICIPANT_ID = p.ID"
                                             + " GROUP BY c.TIMESLOT";
+
+    static final String getAllCalendarAva = "SELECT timeslot, sum(availability)/count(participant_id) AS totalavailability"
+            + " FROM CALENDAR AS c, PARTICIPANTS AS p"
+            + " WHERE c.EVENT_ID  = ?"
+            + " AND c.PARTICIPANT_ID = p.ID"
+            + " GROUP BY c.TIMESLOT";
 
     //participant name given participant id
     static final String getParticipantName = "select p_name from participants where id = ?";
@@ -60,6 +66,11 @@ public class EmbeddedService {
                                                    + " select id from participants where p_name = ?)";
     //event name given event id
     static final String getEventName = "select event_name from event where event_id = ?";
+
+    //get weight given p_name
+    static final String getWeight = "SELECT weight"
+                                + " FROM PARTICIPANTS"
+                                + " WHERE P_NAME = ?";
 
     //adding data
     //add given participant name
@@ -81,6 +92,11 @@ public class EmbeddedService {
                                 + " AND timeslot = ?"
                                 + " AND EVENT_ID  = ?";
 
+
+    //update event
+    static final String updateWeight = "UPDATE PARTICIPANTS"
+                                    + " SET WEIGHT = ?"
+                                    + " WHERE P_NAME = ?";
 
     public void addPName(String name){
         log.info("\nadding participant\n");
@@ -205,6 +221,18 @@ public class EmbeddedService {
         return output;
     }
 
+    @GetMapping("/geteventsA/{e_id}")
+    public List<Events> getalleventsA(@PathVariable("e_id")int e_id){
+        log.info("Getting all events for organizer to view");
+        List<Events> output = localtemplate.query(getAllCalendarAva, new RowMapper<Events>() {
+            @Override
+            public Events mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Events(rowNum, rs.getTimestamp(1),rs.getFloat(2));
+            }
+        }, e_id);
+        return output;
+    }
+
     @GetMapping("/CalendarOfP/{p_name}")
     public List<Events> getCOfP(@PathVariable("p_name") String p_name){
         log.info("getting events of participant " + p_name);
@@ -250,6 +278,27 @@ public class EmbeddedService {
         Timestamp tempstart = new Timestamp(date1.getTime());
         this.deleteRowforParticipant(p_id, tempstart, 1);
     }
+
+    @GetMapping("Update/{p_name}/{weight}")
+    public void UpdateWeight(@PathVariable("p_name") String p_name, @PathVariable("weight") float weight){
+        log.info("Updating weight of participant " + p_name + " with weight " + weight);
+        //int p_id = localtemplate.queryForObject(getPArticipantId, new Object[]{p_name}, Integer.class);
+        if(p_name.equals("NOBODY SELECTED")){
+            return;
+        }
+        localtemplate.update(updateWeight, weight, p_name);
+    }
+
+    @GetMapping("Weight/{p_name}")
+    public float GetWeight(@PathVariable("p_name")String p_name){
+        log.info("getting weight for participant " + p_name);
+        if(p_name.equals("NOBODY SELECTED")){
+            return 0;
+        }
+        float output = localtemplate.queryForObject(getWeight, new Object[]{p_name}, Float.class);
+        return output;
+    }
+
 }
 
 
