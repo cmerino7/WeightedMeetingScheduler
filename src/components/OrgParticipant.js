@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import { Slider as SliderDHX } from "dhx-suite";
 import "dhx-suite/codebase/suite.min.css";
 import './OrgParticipant.css'
-import e from "cors";
+//import e from "cors";
 
 
 
@@ -25,19 +25,21 @@ class OrgParticipant extends Component{
             times: [],
             availability: [],
             events: [],
-            value: 69, //THIS SHOULD BE SET FROM BACKEND(CURRENT PARTICIPANT WEIGHT)
+            eventsW: [],
+            value: 50, //THIS SHOULD BE SET FROM BACKEND(CURRENT PARTICIPANT WEIGHT)
             currentParticipant: "NOBODY SELECTED"
         }
     }
 
     callbackFunction = (childData) => { //when slider is moved, will update this state
         this.setState({ value: childData });
+        this.render()
      };
 
     getLink = (e) => {
         const changeValue = e.target.value
         this.setState({currentParticipant:this.state.list[changeValue-1].name})
-        console.log(this.state.list[changeValue-1].name )
+        console.log("getlink" + this.state.list[changeValue-1].name )
        };
 
     componentDidMount() {
@@ -61,8 +63,18 @@ class OrgParticipant extends Component{
 
         fetch("http://localhost:8080/database/getevents/1")
             .then(res => res.json())
+            .then(json => this.setState({ eventsW: json }))
+            .then(output => console.log("getting all availabilities"))
+
+            fetch("http://localhost:8080/database/geteventsA/1")
+            .then(res => res.json())
             .then(json => this.setState({ events: json }))
             .then(output => console.log("getting all availabilities"))
+
+        let url = "http://localhost:8080/database/Weight/" + this.state.currentParticipant
+        fetch(url)
+            .then(res => res.text())
+            .then(output => this.setState({value:output}))
     }
 
     render(){
@@ -70,15 +82,18 @@ class OrgParticipant extends Component{
         const { list } = this.state;
         const { times } = this.state;
         const { availability } = this.state;
+        const { value } = this.state;
+        const { eventsW } = this.state;
+        console.log({eventsW})
 
         console.log("list",{list})
         console.log("times",{times})
         console.log("avail",{availability})
-
+        console.log("weight",{value})
 
 	    let dataDropDown = list.length > 0 && list.map((item, i) => { return (
             
-            <option key={i} value={item.id}> {item.name} {item.weight} </option>
+            <option key={i} value={item.id}> {item.name}</option>
             )
         }, this);
 	    let dataList = list.length > 0 && list.map((item, i) => { return (
@@ -86,11 +101,13 @@ class OrgParticipant extends Component{
             )
 	    }, this);
         
-
+        
         //this.setState({events: {start: parseISO(this.state.events.start), end: parseISO(this.state.events.end)}})
 
         const {events} = this.state;
         console.log({events})
+
+
 
         if (events.length > 0 && !(events[0] instanceof Date)) {
             var id = 0;
@@ -98,9 +115,12 @@ class OrgParticipant extends Component{
                 events[i].event_id = ++id;
                 events[i].start = new Date(events[i].start)
                 events[i].end = new Date(events[i].end)
-                events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0,"+(this.state.value/100)+")" //EDIT COLOR HERE
+                events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0," + eventsW[i].availability+ ")" //EDIT COLOR HERE
             }
         }
+
+        let url = "http://localhost:8080/database/Update/" + this.state.currentParticipant + "/" + (this.state.value*0.01 + 0.01)
+        fetch(url)
         return(
             <div className="orgParticipant">
                 
