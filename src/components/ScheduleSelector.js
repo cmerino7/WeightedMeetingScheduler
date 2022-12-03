@@ -10,7 +10,7 @@ import "./ScheduleSelector.css"
 import { Button } from "@mui/material";
 import { Popover } from "@mui/material";
 import { Tooltip } from "@mui/material";
-import scale from './scale.png'
+import scale from './scale2.png' //change to scale.png to revert to red-white-green scale
 
 class Appp extends React.Component {
     constructor(props) {
@@ -51,18 +51,32 @@ class Appp extends React.Component {
 
         while(true){        //Do something with these colors ig
             colorNum = this.state.val;
-            let r =(colorNum-50)*255/100*2
+            // let r =(colorNum-50)*255/100*2                           //uncomment this to revert to red-white-green
+            let r = (colorNum-50)*4 //
             console.log("r,g",r)
             if(colorNum < 50){
-                colorsel = "rgb(255,"+(255+r)+","+(255+r)+")";
+                colorsel = "rgb(200,"+(200+r)+",0)";
                 console.log("colorselect",colorsel);
                 break;
             }
             else if(colorNum >= 50){
-                colorsel = "rgb("+(255+(-r))+",255,"+(255+(-r))+")";
+                colorsel = "rgb("+(200-r)+",200,0)";
                 console.log("colorselect",colorsel);
                 break;
-            }else{
+            }
+            
+            // if(colorNum < 50){                                       //uncomment this to revert to red-white-green
+            //     colorsel = "rgb(255,"+(255+r)+","+(255+r)+")";
+            //     console.log("colorselect",colorsel);
+            //     break;
+            // }
+            // else if(colorNum >= 50){
+            //     colorsel = "rgb("+(255+(-r))+",255,"+(255+(-r))+")";
+            //     console.log("colorselect",colorsel);
+            //     break;
+            // }
+            
+            else{
                 colorsel = "000000";
                 // window.alert("error try again!!")
                 break;
@@ -181,25 +195,9 @@ class Appp extends React.Component {
                 <div className="Slider">
                     <div ref={el => (this.el = el)} style={{ width: "300px", height: "50px", justifyContent: "center" , margin: "auto"}}></div>
                     <div className="scale"><img src={scale} ></img></div>
-                    <p className="avail-label">Less&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;More</p>
-                    
-                    
-                    
-                    
+                    <p className="avail-label">Less Available&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;More Available</p>
+                                                        {/* lol any better ideas for this^^ */}
 
-
-
-
-
-
-
-                    {/* Delete these next five lines */}
-                    {/* <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
-                        <button className="button button--bordered">{`Event: ${this.state.event}`}</button>
-                        <button className="button button--bordered">
-                        Item(debug): {this.state.val ? this.state.val : ""}
-                        </button>
-                    </div> */}
                 </div>
                 {/* Slider Component End */}
                 <div className="Scheduler">

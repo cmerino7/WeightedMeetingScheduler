@@ -11,8 +11,8 @@ import PropTypes from "prop-types";
 import { Slider as SliderDHX } from "dhx-suite";
 import "dhx-suite/codebase/suite.min.css";
 import './OrgParticipant.css'
-// import e from "cors";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { sliderClasses } from "@mui/material";
 //import e from "cors";
 
 
@@ -36,13 +36,22 @@ class OrgParticipant extends Component{
     callbackFunction = (childData) => { //when slider is moved, will update this state
         this.setState({ value: childData });
         this.render()
+        console.log("callback ran")
      };
 
-    getLink = (e) => {
+    getLink = (e) => {  //upon dropdown selection this runs
         const changeValue = e.target.value
-        this.setState({currentParticipant:this.state.list[changeValue-1].name})
-        console.log("getlink" + this.state.list[changeValue-1].name )
+        this.setState({
+            currentParticipant:this.state.list[changeValue-1].name,
+            value: this.state.list[changeValue-1].weight*100            
+        })
+        this.forceUpdate()
+        console.log("getlink\t\t\t" + this.state.list[changeValue-1].name + this.state.list[changeValue-1].weight*100)
        };
+
+    reRender(){
+        console.log("CALLED")
+    }
 
     componentDidMount() {
         fetch("http://localhost:8080/database/ParticipantList")
@@ -56,22 +65,22 @@ class OrgParticipant extends Component{
         fetch("http://localhost:8080/database/alltime/test/1")
             .then(res => res.json())
             .then(json => this.setState({ times: json }))
-            .then(output => console.log("getting all times"))
+            // .then(output => console.log("getting all times"))
 
         fetch("http://localhost:8080/database/allava/test/1")
             .then(res => res.json())
             .then(json => this.setState({ availability: json }))
-            .then(output => console.log("getting all availabilities"))
+            // .then(output => console.log("getting all availabilities"))
 
         fetch("http://localhost:8080/database/getevents/1")
             .then(res => res.json())
             .then(json => this.setState({ eventsW: json }))
-            .then(output => console.log("getting all availabilities"))
+            // .then(output => console.log("getting all availabilities"))
 
             fetch("http://localhost:8080/database/geteventsA/1")
             .then(res => res.json())
             .then(json => this.setState({ events: json }))
-            .then(output => console.log("getting all availabilities"))
+            // .then(output => console.log("getting all availabilities"))
 
         let url = "http://localhost:8080/database/Weight/" + this.state.currentParticipant
         fetch(url)
@@ -94,14 +103,13 @@ class OrgParticipant extends Component{
         console.log("weight",{value})
 
 	    let dataDropDown = list.length > 0 && list.map((item, i) => { return (
-            
             <option key={i} value={item.id}> {item.name}</option>
             )
         }, this);
 	    let dataList = list.length > 0 && list.map((item, i) => { return (
             <div className="nameList-container">
-            <li key={i} value={item.id}>{item.name} <div className="progBar"> <ProgressBar completed={item.weight*100} 
-                                                                bgColor="#1976d2"
+            <li key={i} value={item.id}>{item.name} <div className="progBar"> <ProgressBar completed={(item.weight*100).toPrecision(3)-1} 
+                                                                bgColor="#1976d2"               //
                                                                 height="15px"
                                                                 borderRadius="6px"
                                                                 labelSize="13px"
@@ -123,7 +131,27 @@ class OrgParticipant extends Component{
                 events[i].event_id = ++id;
                 events[i].start = new Date(events[i].start)
                 events[i].end = new Date(events[i].end)
-                events[i].color = "rgb("+(255-(events[i].availability*255))+",190,0," + eventsW[i].availability+ ")" //EDIT COLOR HERE
+
+                let c =((events[i].availability*100))
+                console.log("\t\tevent.avail:",events[i].availability)
+                let alphaScaled = eventsW[i].availability/2
+                // console.log("\t\tr:",r)
+                let r = (c-50)*255/100*2
+                // console.log("\t\tx:",xxx)
+                if(c < 50){
+                    events[i].color = "rgba(200,"+(200+r)+",0,"+eventsW[i].availability+")";
+                    // console.log("\t\tcolorr under 50:",events[i].color)
+                }
+                else if(c >= 50){
+                    events[i].color = "rgba("+(200-r)+",200,0,"+eventsW[i].availability+")";
+                    // console.log("\t\tcolorr over 50:",events[i].color)
+                }else{
+                    events[i].color = "000000";
+                    // window.alert("error try again!!")
+                }
+                console.log("\t\tEVENT",i,events[i].color)
+
+
             }
         }
 
@@ -149,7 +177,7 @@ class OrgParticipant extends Component{
                 <p>
                     {}
                     Please use the slider to change participant's relevance-weight
-                    <br></br>test-currentName: {this.state.currentParticipant} <p id="event-name"></p>
+                    <br></br>test-currentName: {this.state.currentParticipant}w:{this.state.value} <p id="event-name"></p>
 
                     </p>
 
@@ -160,6 +188,7 @@ class OrgParticipant extends Component{
         <Slider className ="slider"
           dataFromParent = {this.state.value}      //data to child
           parentCallback = {this.callbackFunction} //data from child
+          key = {this.state.currentParticipant}
         />
         <ul className="list">
             <h3 className="partHeader">Participant List</h3>
@@ -177,7 +206,7 @@ class OrgParticipant extends Component{
                 weekStartOn: 6,
                 startHour: 8,
                 endHour: 13,
-                step: 15}}>
+                step: 60}}>
 
         </Scheduler>
         </div>
