@@ -37,20 +37,15 @@ class Homepage extends React.Component{
     render(){
         const {currentName} = this.state;
          return(
-             <div>
+             <div className='LoginPage'>
                  <Message isLoggedIn={this.state.isLoggedIn} name={this.state.currentName}/>
                 { 
                     (this.state.isLoggedIn)?(
                     <div>
                         <div className="logout-div"><Logout onClickFunc = {this.logoutClicked} /></div>
-
                         <div className='Slider'>
                             <div className="ScheduleSelector">
-                                <Appp
-                                   dataFromParent = {this.state.currentName}
-                                // calendar={calendar}
-                                // handleSubmitCalendar={handleSubmitCalendar}
-                                />
+                                <Appp dataFromParent = {this.state.currentName}/>
                             </div>
                         </div>
                     </div>

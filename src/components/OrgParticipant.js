@@ -12,8 +12,7 @@ import { Slider as SliderDHX } from "dhx-suite";
 import "dhx-suite/codebase/suite.min.css";
 import './OrgParticipant.css'
 import e from "cors";
-
-
+import ProgressBar from "@ramonak/react-progress-bar";
 
 
 class OrgParticipant extends Component{
@@ -82,7 +81,13 @@ class OrgParticipant extends Component{
             )
         }, this);
 	    let dataList = list.length > 0 && list.map((item, i) => { return (
-            <li key={i} value={item.id}> {item.name} {item.weight} </li>
+            <div className="nameList-container">
+            <li key={i} value={item.id}>{item.name} <div className="progBar"> <ProgressBar completed={item.weight*100} 
+                                                                bgColor="#1976d2"
+                                                                height="15px"
+                                                                borderRadius="6px"
+                                                                labelSize="13px"
+                                                                /></div></li></div>
             )
 	    }, this);
         
@@ -133,9 +138,11 @@ class OrgParticipant extends Component{
           dataFromParent = {this.state.value}      //data to child
           parentCallback = {this.callbackFunction} //data from child
         />
-        <ol className="list">
-                {dataList}
-            </ol>
+        <ul className="list">
+            <h3 className="partHeader">Participant List</h3>
+            <h6 className="partLabels">Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Relevance</h6>
+            {dataList}
+        </ul>
             </div>
         </header>
 

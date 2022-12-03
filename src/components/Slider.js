@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Slider as SliderDHX } from "dhx-suite";
 import "dhx-suite/codebase/suite.min.css";
 import React, { Component } from "react";
-
+import './OrgParticipant.css'
 
 class Slider extends Component{
   constructor(props) {
@@ -19,6 +19,7 @@ class Slider extends Component{
 
   componentDidMount() {
       this.slider = new SliderDHX(this.el, {
+          css: 'custom_class',
           min: 0,
           max: 100,
           step: 1,

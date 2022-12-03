@@ -33,11 +33,10 @@ class Login extends React.Component {
     render() {
       //const data = {};
       return (
-        
-        <form onSubmit={this.sendData} > 
-          <input className="nameField" type="text" value={this.state.value} onChange={this.handleChange}/>    
-          <input className='logButton' type="submit" value="Submit" />
-        </form>
+          <form className="loginForm" onSubmit={this.sendData} > 
+            <input className="nameField" type="text" value={this.state.value} onChange={this.handleChange}/>    
+            <input className='logButton' type="submit" value="Submit" />
+          </form>
       );
     }
   }
