@@ -1,8 +1,8 @@
-.logButton {
+.logButton {                /*SUBMIT BUTTON*/
     align-items: center;
     appearance: button;
     background-color: #1976d2;
-    border-radius: 8px;
+    border-radius: 5px;
     border-style: none;
     box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
     box-sizing: border-box;
@@ -13,8 +13,9 @@
     font-size: 16px;
     line-height: 1;
     /* height: 40px; */
-    margin-left: 5px;
+    margin-top: 12px;
     padding: 7px 5px;
+    min-width: 408px;
     text-align: center;
     text-transform: none;
     transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
@@ -23,33 +24,66 @@
     touch-action: manipulation;
     font-weight: bold;
 }
-
 .logButton:active {
     background-color: #006AE8;
 }
-
 .logButton:hover {
     background-color: #1C84FF;
-
 }
 
-.loginForm, .loginMsg{
-    text-align: center;
+#nameformLabel{
+    font-size: smaller;
+    font-weight: 700;
+    position:absolute;
+    left:50%;
+    transform: translateX(-200px);
+    top:145px;
+}
+
+.loginForm-div{ /*bigger main body container*/
+    margin:100px 500px 0px 500px;    
+    border-radius: 20px;
+    padding: 140px 200px 200px 200px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    position: relative;
+}
+
+
+
+.nameField, .logButton{
+    /* text-align: center; */
     justify-content: center;
+    position:absolute;
+    left:50%;
+    transform: translateX(-50%);
+    display:grid;
+
 }
 
-
-
+.loginMsg{
+    text-align: center;
+}
 .nameField {
-    min-width:500px;
-    max-width:40%;
+    text-align: center;
+    width:400px;
     height: 25px;
     font-size: 20px;
     color: #000;
     font-weight: bold;
     border-radius: 5px;
-    position: relative;
-    top: 2px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+}
+.nameField:focus {
+    text-align: center;
+    min-width:400px;
+    height: 25px;
+    font-size: 20px;
+    box-shadow: 0 0 5px #006AE8;
+    border: 2px solid #1C84FF;
 }
 
 .logout-div {
@@ -63,6 +97,6 @@ h1 {
     padding-left: 20px;
 }
 
-h2{
+/* h2{
     padding-left: 40px;
-}
+} */

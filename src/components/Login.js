@@ -34,7 +34,9 @@ class Login extends React.Component {
       //const data = {};
       return (
           <form className="loginForm" onSubmit={this.sendData} > 
-            <input className="nameField" type="text" value={this.state.value} onChange={this.handleChange}/>    
+            <label id="nameformLabel" for="nameForm">Full Name</label><br></br>
+            <input id="nameForm" className="nameField" type="text" value={this.state.value} onChange={this.handleChange}/>
+            <br></br>    
             <input className='logButton' type="submit" value="Submit" />
           </form>
       );

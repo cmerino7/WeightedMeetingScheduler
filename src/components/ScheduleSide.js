@@ -50,7 +50,9 @@ class Homepage extends React.Component{
                         </div>
                     </div>
                     ) : (
+                        <div className='loginForm-div'>
                         <Login onClickFunc = {this.loginClicked} parentCallback = {this.callbackFunction} />
+                        </div>
                     )
                 }
             </div>
