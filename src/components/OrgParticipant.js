@@ -95,7 +95,9 @@ class OrgParticipant extends Component{
         const { availability } = this.state;
         const { value } = this.state;
         const { eventsW } = this.state;
+        const { data } = this.state;
         console.log({eventsW})
+        console.log("data",{data})
 
         console.log("list",{list})
         console.log("times",{times})
@@ -177,7 +179,7 @@ class OrgParticipant extends Component{
                 <p>
                     {}
                     Please use the slider to change participant's relevance-weight
-                    <br></br>test-currentName: {this.state.currentParticipant}w:{this.state.value} <p id="event-name"></p>
+                    <p id="event-name"></p>
 
                     </p>
 
@@ -206,7 +208,7 @@ class OrgParticipant extends Component{
                 weekStartOn: 6,
                 startHour: 8,
                 endHour: 13,
-                step: 60}}>
+                step: 15}}>
 
         </Scheduler>
         </div>
