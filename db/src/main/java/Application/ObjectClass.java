@@ -98,8 +98,8 @@ class Events{
     private Timestamp calc(Timestamp time){
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(time.getTime());
-        //cal.add(Calendar.MINUTE,15);
-        cal.add(Calendar.HOUR,1);
+        cal.add(Calendar.MINUTE,15);
+        //cal.add(Calendar.HOUR,1);
         java.sql.Timestamp ts_new_date_ws = new java.sql.Timestamp(cal.getTime().getTime());
         return ts_new_date_ws;
     }
