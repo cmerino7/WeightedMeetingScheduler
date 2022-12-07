@@ -1,8 +1,6 @@
-## https://main.d19dwh47n3ikzf.amplifyapp.com/
+## [Relevance-Weighted Meeting Scheduler](https://main.d19dwh47n3ikzf.amplifyapp.com/)
 # About
-This is a fork of 
-
-
+This is a fork of [RWMS](https://github.com/Fin-NewWin/relevance_weighted_meeting_scheduler) to test online instances with AWS
 
 # Installation
 
